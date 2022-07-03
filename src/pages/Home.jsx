@@ -3,10 +3,12 @@ import styled from "styled-components";
 import Header from "../components/Header";
 import Info from "../components/Info";
 import Chat from "../components/Chat";
+import Status from "../components/Status";
 
 const Main = styled.main`
   display: flex;
   justify-content: center;
+  min-width: 144rem;
 `;
 const Container = styled.div`
   display: grid;
@@ -16,8 +18,8 @@ const Container = styled.div`
   justify-items: center;
   grid-template:
     "info info chat" 30rem
-    "status status chat" 1fr
-    "day day chat" 1fr
+    "status status chat" 20rem
+    "day day chat" 50rem
     "graph graph graph" / 1fr 1fr;
 `;
 const Dumy = styled.div`
@@ -41,6 +43,7 @@ function Home() {
         <Container>
           <Info />
           <Chat />
+          <Status />
         </Container>
       </Main>
     </>
