@@ -7,6 +7,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   border-bottom: 1px solid #d9d9da;
+  min-width: 144rem;
 `;
 const Contents = styled.div`
   display: flex;

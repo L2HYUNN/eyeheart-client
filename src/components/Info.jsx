@@ -1,4 +1,3 @@
-import ApexChart from "react-apexcharts";
 import styled from "styled-components";
 import child from "../assets/child.jpeg";
 
@@ -47,7 +46,7 @@ const ContentText = styled.div`
 `;
 const Chart = styled.div``;
 const ChartName = styled.span`
-  font-size: 1.4rem;
+  font-size: ${({ theme }) => theme.fontSizes.main};
   font-weight: 500;
   margin-right: 1rem;
 `;
@@ -60,12 +59,14 @@ const ChartGraph = styled.div`
   width: 30rem;
   height: 3rem;
   background-color: ${({ theme }) => theme.colors.pink};
+  box-shadow: ${({ theme }) => theme.colors.pink} 0px 6px 24px 0px,
+    ${({ theme }) => theme.colors.pink} 0px 0px 0px 1px;
   margin-right: 1rem;
 `;
 const ChartNumber = styled.div``;
 const Heart = styled.div``;
 const HeartName = styled.div`
-  font-size: 1.4rem;
+  font-size: ${({ theme }) => theme.fontSizes.main};
   font-weight: 500;
 `;
 const HeartContents = styled.div`
@@ -81,25 +82,25 @@ const HeartInfo = styled.div`
   height: 4rem;
   border-radius: 1rem;
   background-color: ${(props) => props.color};
-  font-size: 1.3rem;
-  font-weight: 500;
+  font-size: 1.8rem;
+  font-weight: 400;
+  font-family: "Gamja Flower", cursive;
+  box-shadow: ${(props) => props.color} 0px 6px 24px 0px,
+    ${(props) => props.color} 0px 0px 0px 1px;
 `;
 const Interest = styled.div``;
 const InterestName = styled.div`
-  font-size: 1.4rem;
+  font-size: ${({ theme }) => theme.fontSizes.main};
   font-weight: 500;
 `;
 const InterestContents = styled.div`
   display: flex;
-  font-size: 1.4rem;
+  font-size: ${({ theme }) => theme.fontSizes.main};
   margin-top: 1rem;
 `;
 const InterestItem = styled.div`
   font-weight: 600;
 `;
-
-const Text = styled.ul``;
-const TextList = styled.li``;
 
 function Info() {
   const DumuyHeart = [

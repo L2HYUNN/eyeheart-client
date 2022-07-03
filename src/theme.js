@@ -4,10 +4,11 @@ const colors = {
 
 const fontSizes = {
   nav: "1.8rem",
+  main: "1.4rem",
 };
 
 const fontWeights = {
-  nav: "400",
+  nav: "500",
 };
 
 const theme = {
