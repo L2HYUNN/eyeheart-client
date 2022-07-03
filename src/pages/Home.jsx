@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Info from "../components/Info";
 import Chat from "../components/Chat";
 import Status from "../components/Status";
+import Weather from "../components/Weather";
 
 const Main = styled.main`
   display: flex;
@@ -18,21 +19,9 @@ const Container = styled.div`
   justify-items: center;
   grid-template:
     "info info chat" 30rem
-    "status status chat" 20rem
-    "day day chat" 50rem
-    "graph graph graph" / 1fr 1fr;
-`;
-const Dumy = styled.div`
-  width: 72rem;
-  height: 50rem;
-  grid-area: info;
-  background-color: #1abc9c;
-`;
-const Dumy2 = styled.div`
-  width: 72rem;
-  height: 150rem;
-  grid-area: chat;
-  background-color: #3498db;
+    "status status chat" 25rem
+    "weather weather chat" 25rem
+    "weather weather chat" 25rem / 1fr 1fr;
 `;
 
 function Home() {
@@ -44,6 +33,7 @@ function Home() {
           <Info />
           <Chat />
           <Status />
+          <Weather />
         </Container>
       </Main>
     </>
