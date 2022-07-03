@@ -30,8 +30,8 @@ const TitleName = styled.h1`
 `;
 const Nav = styled.div`
   display: flex;
-  font-size: 1.8rem;
-  font-weight: 400;
+  font-size: ${({ theme }) => theme.fontSizes.nav};
+  font-weight: ${({ theme }) => theme.fontWeights.nav};
 `;
 const NavList = styled.ul`
   display: flex;
