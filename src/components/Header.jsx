@@ -2,6 +2,7 @@ import styled from "styled-components";
 import child from "../assets/child.jpeg";
 import notification from "../assets/notification.svg";
 import flower from "../assets/flower.svg";
+import avatar from "../assets/avatar.svg";
 
 const Container = styled.div`
   display: flex;
@@ -55,8 +56,13 @@ const NavNotification = styled.img`
   height: 3rem;
 `;
 
-function Header() {
-  const TextList = ["채팅", "게시판", "FAQ"];
+function Header({ user }) {
+  let TextList;
+  if (user) {
+    TextList = ["채팅", "게시판", "FAQ"];
+  } else {
+    TextList = ["로그인", "회원가입", "FAQ"];
+  }
 
   return (
     <header>
@@ -74,7 +80,7 @@ function Header() {
             </NavList>
             <NavList>
               <NavItem>
-                <NavImg src={child} />
+                {user ? <NavImg src={child} /> : <NavImg src={avatar} />}
               </NavItem>
               <NavItem>
                 <NavNotification src={notification} />

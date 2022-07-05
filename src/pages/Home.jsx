@@ -31,7 +31,7 @@ const Container = styled.div`
 function Home() {
   return (
     <>
-      <Header />
+      <Header user={false} />
       <Main>
         <Container>
           <Info />
