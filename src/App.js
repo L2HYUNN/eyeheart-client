@@ -52,6 +52,11 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+a {
+  color: black;
+  text-decoration: none;
+  
+}
 * {
   box-sizing: border-box;
 }
