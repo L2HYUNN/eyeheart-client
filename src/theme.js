@@ -1,6 +1,6 @@
 const colors = {
-  pink: "#ffd8e3",
-  darkPink: "#ffc4d3",
+  pink: "#FFC6AE",
+  darkPink: "#fea47f",
 };
 
 const fontSizes = {
