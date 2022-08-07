@@ -62,7 +62,7 @@ function Header({ user }) {
   if (user) {
     TextList = [
       { title: "채팅", url: "/chat" },
-      { title: "게시판", url: "/notice" },
+      { title: "상담", url: "/consulting" },
       { title: "FAQ", url: "/faq" },
     ];
   } else {

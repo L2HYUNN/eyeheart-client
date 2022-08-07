@@ -16,8 +16,8 @@ const Contents = styled.div`
   width: 67rem;
   height: 25rem;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   border-radius: 2rem;
 `;
 const ContentInfo = styled.div`
@@ -59,8 +59,8 @@ const ChartGraph = styled.div`
   width: 30rem;
   height: 3rem;
   background-color: ${({ theme }) => theme.colors.pink};
-  box-shadow: ${({ theme }) => theme.colors.pink} 0px 6px 24px 0px,
-    ${({ theme }) => theme.colors.pink} 0px 0px 0px 1px;
+  /* box-shadow: ${({ theme }) => theme.colors.pink} 0px 6px 24px 0px,
+    ${({ theme }) => theme.colors.pink} 0px 0px 0px 1px; */
   margin-right: 1rem;
 `;
 const ChartNumber = styled.div``;
@@ -85,8 +85,8 @@ const HeartInfo = styled.div`
   font-size: 1.8rem;
   font-weight: 400;
   font-family: "Gamja Flower", cursive;
-  box-shadow: ${(props) => props.color} 0px 6px 24px 0px,
-    ${(props) => props.color} 0px 0px 0px 1px;
+  /* box-shadow: ${(props) => props.color} 0px 6px 24px 0px,
+    ${(props) => props.color} 0px 0px 0px 1px; */
 `;
 const Interest = styled.div``;
 const InterestName = styled.div`

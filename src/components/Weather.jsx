@@ -46,7 +46,7 @@ function Weather() {
                 },
                 background: "white",
               },
-              colors: "#ffd8e3",
+              colors: "#FFC6AE",
               xaxis: {
                 categories: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
                 labels: {

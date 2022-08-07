@@ -10,6 +10,7 @@ import weather from "../assets/weather.png";
 import mobile from "../assets/mobile.png";
 import mobileMain from "../assets/mobileMain.png";
 import mobileChat from "../assets/mobileChat.png";
+import { Link } from "react-router-dom";
 
 const Container = styled.main`
   display: flex;
@@ -50,6 +51,9 @@ const InfoButton = styled.button`
   background-color: ${({ theme }) => theme.colors.darkPink};
   border: none;
   border-radius: 0.5rem;
+  a {
+    color: white;
+  }
 `;
 const InfoSubContents = styled.div``;
 const InfoImg = styled.img`
@@ -198,7 +202,9 @@ function Main() {
             <InfoSubTitle>
               다양한 통계를 통해 아이의 상태가 제공됩니다.
             </InfoSubTitle>
-            <InfoButton>가입하고 아이마음 확인하기</InfoButton>
+            <InfoButton>
+              <Link to={"/join"}>가입하고 아이마음 확인하기</Link>
+            </InfoButton>
           </InfoContents>
           <InfoSubContents>
             <InfoImg src={page} />
@@ -278,7 +284,9 @@ function Main() {
             <LastInfoTitle>
               아이의 숨은 마음을 확인 할 준비가 되셨나요?
             </LastInfoTitle>
-            <LastInfoButton>아이마음 시작하기</LastInfoButton>
+            <LastInfoButton>
+              <Link to={"/join"}>아이마음 시작하기</Link>
+            </LastInfoButton>
           </LastInfoContents>
         </LastInfo>
       </Container>
