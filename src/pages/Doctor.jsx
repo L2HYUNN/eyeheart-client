@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Office from "../assets/office.jpeg";
 import PersonImg from "../assets/person.jpeg";
 import { Marker, NaverMap, RenderAfterNavermapsLoaded } from "react-naver-maps";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const NAVER_API_KEY = process.env.REACT_APP_NAVER_CLIENT_ID;
 
@@ -177,6 +177,7 @@ const dummyCareer = [
 ];
 
 function Doctor() {
+  const { id } = useParams();
   return (
     <>
       <Header user={true} />
@@ -219,7 +220,7 @@ function Doctor() {
                 </ClinicCenterText>
                 <ClinicCenterText>테헤란로 202 (우) 06220</ClinicCenterText>
                 <ClinicCenterButton>
-                  <Link to={"/consulting/reserve"}>상담 예약하기</Link>
+                  <Link to={`/consulting/${id}/reserve`}>상담 예약하기</Link>
                 </ClinicCenterButton>
               </ClinicTexts>
               <ClinicMap>

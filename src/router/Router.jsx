@@ -1,4 +1,6 @@
 import { BrowserRouter as Routers, Routes, Route } from "react-router-dom";
+import ChatDetail from "../pages/ChatDetail";
+import CheckReservation from "../pages/CheckReservation";
 import Consulting from "../pages/Consulting";
 import Doctor from "../pages/Doctor";
 import Home from "../pages/Home";
@@ -16,10 +18,12 @@ function Router() {
         <Route path="/home" element={<Home />} />
         <Route path="/join" element={<Join />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/chat" element={<ChatDetail />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/:id/reserve" element={<CheckReservation />} />
         <Route path="/consulting" element={<Consulting />} />
         <Route path="/consulting/:id" element={<Doctor />} />
-        <Route path="/consulting/reserve" element={<Reserve />} />
+        <Route path="/consulting/:id/reserve" element={<Reserve />} />
       </Routes>
     </Routers>
   );
