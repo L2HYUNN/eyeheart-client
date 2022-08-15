@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import Counseling from "../assets/counseling.jpeg";
 import RightArrow from "../assets/right-arrow.svg";
 import Hand from "../assets/hand.jpeg";
 import Time from "../assets/time.svg";

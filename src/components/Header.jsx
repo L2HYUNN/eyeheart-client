@@ -97,7 +97,13 @@ function Header({ user }) {
             </NavList>
             <NavList>
               <NavItem>
-                {user ? <NavImg src={child} /> : <NavImg src={avatar} />}
+                {user ? (
+                  <Link to={"/mypage/1/reserve"}>
+                    <NavImg src={child} />
+                  </Link>
+                ) : (
+                  <NavImg src={avatar} />
+                )}
               </NavItem>
               <NavItem>
                 <NavNotification src={notification} />

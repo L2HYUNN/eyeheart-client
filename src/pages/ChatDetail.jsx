@@ -17,7 +17,8 @@ const Main = styled.main`
 `;
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   width: 40rem;
   height: 120rem;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
@@ -25,7 +26,10 @@ const Wrapper = styled.div`
   padding: 2rem;
   border-radius: 2rem;
 `;
-
+const CalendarContents = styled.div`
+  width: 40rem;
+  height: 93.5;
+`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -103,7 +107,9 @@ const ChildChat = styled.div`
   font-size: 1.8rem;
   background-color: white;
   padding: 1.2rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
+  max-width: 50rem;
+  line-height: 2.2rem;
 `;
 const ChildChatTime = styled.div`
   padding-left: 1rem;
@@ -123,7 +129,9 @@ const UserChat = styled.div`
   font-size: 1.8rem;
   background-color: #a5e4fe;
   padding: 1.2rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
+  max-width: 50rem;
+  line-height: 2.2rem;
 `;
 const UserChatTime = styled.div`
   padding-right: 1rem;
@@ -160,73 +168,105 @@ const DummyChat = [
   {
     id: 1,
     name: "민영이",
-    chat: "오늘 너무 우울했어",
-    time: "오후 12:21",
+    chat: "도담아",
+    time: "오후 4:48",
     role: "child",
-  },
-  {
-    id: 6,
-    chat: "왜 그렇게 우울했어?",
-    time: "오후 12:21",
-    role: "user",
   },
   {
     id: 2,
-    name: "민영이",
-    chat: "학교에서 친구랑 싸웠어",
-    time: "오후 12:21",
-    role: "child",
-  },
-  {
-    id: 7,
-    chat: "어쩌다가 싸우게 된거야?",
-    time: "오후 12:21",
+    chat: "네?",
+    time: "오후 4:48",
     role: "user",
   },
   {
     id: 3,
     name: "민영이",
-    chat: "내가 분명 지우개 빌린다고 했는데 친구가 언제 그랬냐면서 화냈어",
-    time: "오후 12:22",
+    chat: "오늘 학교에서 재밌는 일이 있었는데 한 번 들어볼래?",
+    time: "오후 4:48",
     role: "child",
-  },
-  {
-    id: 8,
-    chat: "기분이 안 좋았겠네 그래도 화해하는게 좋지 않을까?",
-    time: "오후 12:22",
-    role: "user",
   },
   {
     id: 4,
-    name: "민영이",
-    chat: "화해 하고 싶은데 어떻게 해야할지 모르겠어",
-    time: "오후 12:22",
-    role: "child",
-  },
-  {
-    id: 9,
-    chat: "왜 그렇게 화가났었는지 물어보고 천천히 이야기해봐!",
-    time: "오후 12:22",
+    chat: "네, 무슨 일인지 정말 궁금해요!",
+    time: "오후 4:48",
     role: "user",
   },
   {
     id: 5,
     name: "민영이",
-    chat: "응 알았어 한 번 해볼게!",
-    time: "오후 12:23",
+    chat: "그럼 한 번 들어봐! 오늘 내가 색종이를 하나 가져왔는데 친구들이 재밌게 놀다가 잃어버렸다는 거야. 그런데 알고보니까 그 색종이를 누가 내 가방에 넣어놨던 거 였어!!",
+    time: "오후 4:49",
     role: "child",
+  },
+  {
+    id: 6,
+    chat: "그런 일이 있었군요. 모두가 웃을 정도로 재밌는 일이었겠네요.",
+    time: "오후 4:49",
+    role: "user",
   },
   {
     id: 7,
     name: "민영이",
-    chat: "나 친구랑 화해했어.",
-    time: "오후 12:25",
+    chat: "그렇지, 반 내에 모두가 한참동안 웃었어. 우리가 그 색종이 찾으려고 엄청 고생했거든!",
+    time: "오후 4:49",
+    role: "child",
+  },
+  {
+    id: 8,
+    chat: "모두가 웃을정도였으면 정말로 재밌었던 일이었겠어요! ",
+    time: "오후 4:50",
+    role: "user",
+  },
+  {
+    id: 9,
+    name: "민영이",
+    chat: "도담아",
+    time: "오후 5:12",
     role: "child",
   },
   {
     id: 10,
-    chat: "정말 잘했어! 친구가 뭐라고 말해?",
-    time: "오후 12:25",
+    chat: "네?",
+    time: "오후 5:12",
+    role: "user",
+  },
+  {
+    id: 11,
+    name: "민영이",
+    chat: "내 친구 지수랑 사이가 멀어질까봐 걱정 돼.",
+    time: "오후 5:12",
+    role: "child",
+  },
+  {
+    id: 12,
+    chat: "무슨 일이 있었는지 자세히 알려줄 수 있나요?",
+    time: "오후 5:13",
+    role: "user",
+  },
+  {
+    id: 13,
+    name: "민영이",
+    chat: "체육시간 때 지수랑 짝궁을 하기로 했는데 현수가 같이 하자고 졸라대서 어쩔 수 없이 현수랑 하게 되었거든, 그래서 지수가 많이 서운해 한 거 같아.",
+    time: "오후 5:13",
+    role: "child",
+  },
+  {
+    id: 14,
+    chat: "그런 일이 있었군요. 풍부한 상상력은 때로는 많은 걱정을 낳기도 한대요. 내일 친구랑 직접 얘기해보는 건 어떨까요? 분명 그 친구도 이해해줄 거에요.",
+    time: "오후 5:13",
+    role: "user",
+  },
+  {
+    id: 15,
+    name: "민영이",
+    chat: "고마워. 한 번 지수한테 얘기 해볼게.",
+    time: "오후 5:13",
+    role: "child",
+  },
+  {
+    id: 16,
+    chat: "그래요. 저도 응원할게요!",
+    time: "오후 5:14",
     role: "user",
   },
 ];
@@ -234,12 +274,12 @@ const DummyChat = [
 function ChatDetail() {
   const [date, setDate] = useState(new Date());
   const [chat, setChat] = useState([]);
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
 
-  const sendMessage = () => {
-    socket.emit("message", message);
-    setMessage("");
-  };
+  // const sendMessage = () => {
+  //   socket.emit("message", message);
+  //   setMessage("");
+  // };
 
   useEffect(() => {
     socket.on("message", (message) => {
@@ -258,6 +298,7 @@ function ChatDetail() {
       <Main>
         <Wrapper>
           <Calendar onChange={setDate} value={date} />
+          <CalendarContents></CalendarContents>
         </Wrapper>
         <Container>
           <Contents>
