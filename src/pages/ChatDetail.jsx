@@ -6,8 +6,8 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useState } from "react";
 import moment from "moment";
-import { socket } from "../App";
-import { useEffect } from "react";
+// import { socket } from "../App";
+// import { useEffect } from "react";
 
 const Main = styled.main`
   display: flex;
@@ -281,11 +281,11 @@ function ChatDetail() {
   //   setMessage("");
   // };
 
-  useEffect(() => {
-    socket.on("message", (message) => {
-      setChat([...chat, message]);
-    });
-  }, [chat]);
+  // useEffect(() => {
+  //   socket.on("message", (message) => {
+  //     setChat([...chat, message]);
+  //   });
+  // }, [chat]);
 
   const sendText = (event) => {
     event.preventDefault();

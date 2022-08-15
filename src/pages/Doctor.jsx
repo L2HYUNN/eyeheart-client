@@ -198,7 +198,9 @@ function Doctor() {
             <PersonCareer>
               <PersonCareerTitle>약력</PersonCareerTitle>
               {dummyCareer.map((career) => {
-                return <PersonCareerText>{career}</PersonCareerText>;
+                return (
+                  <PersonCareerText key={career}>{career}</PersonCareerText>
+                );
               })}
             </PersonCareer>
           </PersonInfo>

@@ -153,11 +153,11 @@ const ReservationTimeTitle = styled.h2`
   margin-bottom: 2rem;
   font-size: 2.4rem;
 `;
-const ReservationTimeInfo = styled.p`
-  opacity: 0.6;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-`;
+// const ReservationTimeInfo = styled.p`
+//   opacity: 0.6;
+//   margin-bottom: 2rem;
+//   font-size: 2rem;
+// `;
 const ReservationTimeContext = styled.div``;
 const ReservationTimeButton = styled.button`
   width: 15rem;
@@ -315,7 +315,9 @@ function Reserve() {
             <PersonCareer>
               <PersonCareerTitle>약력</PersonCareerTitle>
               {dummyCareer.map((career) => {
-                return <PersonCareerText>{career}</PersonCareerText>;
+                return (
+                  <PersonCareerText key={career}>{career}</PersonCareerText>
+                );
               })}
             </PersonCareer>
           </PersonInfo>

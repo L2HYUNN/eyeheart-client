@@ -3,8 +3,8 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { ReactQueryDevtools } from "react-query/devtools";
 import HelmetComponent from "./components/Helmet";
 import theme from "./theme";
-import io from "socket.io-client";
-import { useEffect } from "react";
+// import io from "socket.io-client";
+// import { useEffect } from "react";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -68,15 +68,15 @@ html {
 }
 `;
 
-export const socket = io.connect("http://localhost:80");
-socket.emit("init", { name: "EYEHEART" });
+// export const socket = io.connect("http://localhost:80");
+// socket.emit("init", { name: "EYEHEART" });
 
 function App() {
-  useEffect(() => {
-    return () => {
-      socket.close();
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     socket.close();
+  //   };
+  // }, []);
   return (
     <>
       <ThemeProvider theme={theme}>
