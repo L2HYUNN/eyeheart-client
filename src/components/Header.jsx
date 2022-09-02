@@ -38,11 +38,10 @@ const Nav = styled.div`
 `;
 const NavList = styled.ul`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   width: 20rem;
   &:last-child {
-    margin-left: 3rem;
     width: 10rem;
   }
 `;
@@ -51,6 +50,7 @@ const NavImg = styled.img`
   width: 4.3rem;
   height: 4.3rem;
   border-radius: 50%;
+  margin-right: 2rem;
 `;
 const NavNotification = styled.img`
   width: 3rem;
@@ -63,13 +63,11 @@ function Header({ user }) {
     TextList = [
       { title: "채팅", url: "/chat" },
       { title: "상담", url: "/consulting" },
-      { title: "FAQ", url: "/faq" },
     ];
   } else {
     TextList = [
       { title: "로그인", url: "/login" },
       { title: "회원가입", url: "/join" },
-      { title: "FAQ", url: "/faq" },
     ];
   }
 
