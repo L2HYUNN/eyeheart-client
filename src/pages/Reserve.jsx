@@ -297,7 +297,7 @@ function Reserve() {
 
   return (
     <>
-      <Header user={true} />
+      <Header />
       <Main>
         <Wrapper>
           <PersonInfo>

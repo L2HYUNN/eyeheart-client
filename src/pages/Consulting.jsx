@@ -112,7 +112,7 @@ const dummyDoctor = [
 function Consulting() {
   return (
     <>
-      <Header user={true} />
+      <Header />
       <Main>
         <Promotion src={Hand} />
         <Infos>

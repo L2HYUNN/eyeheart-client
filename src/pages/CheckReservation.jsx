@@ -238,7 +238,7 @@ function CheckReservation() {
   const [info, setInfo] = useState(false);
   return (
     <>
-      <Header user={true} />
+      <Header />
       <Main>
         <Wrapper>
           <Section>

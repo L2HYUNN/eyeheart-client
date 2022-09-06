@@ -180,7 +180,7 @@ function Doctor() {
   const { id } = useParams();
   return (
     <>
-      <Header user={true} />
+      <Header />
       <Main>
         <Wrapper>
           <PersonInfo>
