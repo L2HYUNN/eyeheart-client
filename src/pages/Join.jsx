@@ -4,6 +4,10 @@ import Header from "../components/Header";
 
 import flower from "../assets/flower.svg";
 import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { useMutation } from "react-query";
+import { postUserRegister } from "../api";
+import { useNavigate } from "react-router-dom";
 
 const Main = styled.main`
   display: flex;
@@ -61,7 +65,21 @@ const JoinButton = styled.button`
   cursor: pointer;
 `;
 
+const JoinRadios = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 3rem;
+`;
+
+const JoinRadio = styled.span`
+  font-size: 1.6rem;
+  :first-child {
+  }
+`;
+
 function Join() {
+  const { isSuccess, data, error, mutate } = useMutation(postUserRegister);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -69,15 +87,37 @@ function Join() {
     setError,
   } = useForm();
 
-  const onSubmit = (data, event) => {
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/login");
+    }
+  }, [isSuccess, navigate]);
+
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+    }
+  }, [error]);
+
+  const onLogin = (data, event) => {
+    event.preventDefault();
     if (data.password !== data.confirmedPassword) {
       setError("password", {
         message: "패스워드가 일치하지 않습니다.",
       });
       setError("confirmedPassword");
     }
-    event.preventDefault();
+
+    const mutateData = JSON.stringify({
+      user_name: data.username,
+      user_subname: data.secondname,
+      password: data.confirmedPassword,
+      user_type: "parent",
+    });
+
+    mutate(mutateData);
   };
+
   return (
     <>
       <Header />
@@ -85,7 +125,7 @@ function Join() {
         <Container>
           <JoinImg src={flower} />
           <JoinTitle>회원가입</JoinTitle>
-          <JoinForm onSubmit={handleSubmit(onSubmit)}>
+          <JoinForm onSubmit={handleSubmit(onLogin)}>
             <JoinInput
               errors={errors.username}
               {...register("username", {
