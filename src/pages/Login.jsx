@@ -3,8 +3,11 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 import flower from "../assets/flower.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import { postUserLogin } from "../api";
+import { useEffect } from "react";
 
 const Main = styled.main`
   display: flex;
@@ -61,11 +64,43 @@ const LoginJoinText = styled.div`
 `;
 
 function Login() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { isSuccess, error, data, mutate } = useMutation(postUserLogin);
+  const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+
+  const onLogin = (data, event) => {
+    event.preventDefault();
+
+    const mutateData = JSON.stringify({
+      user_name: data.username,
+      password: data.password,
+    });
+    mutate(mutateData);
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      const {
+        data: {
+          user_id: userId,
+          access_token: accessToken,
+          refresh_token: refreshToken,
+        },
+      } = data;
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ user: true, userId, accessToken, refreshToken })
+      );
+      navigate("/");
+    }
+  }, [isSuccess, data, navigate]);
+
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+    }
+  }, [error]);
+
   return (
     <>
       <Header />
@@ -73,13 +108,17 @@ function Login() {
         <Container>
           <LoginImg src={flower} />
           <LoginTitle>로그인</LoginTitle>
-          <LoginForm>
+          <LoginForm onSubmit={handleSubmit(onLogin)}>
             <LoginInput
               {...register("username")}
               type="text"
               placeholder="이메일"
             />
-            <LoginInput type="password" placeholder="비밀번호" />
+            <LoginInput
+              {...register("password")}
+              type="password"
+              placeholder="비밀번호"
+            />
             <LoginButton type="submit">로그인</LoginButton>
           </LoginForm>
           <LoginJoinText>
