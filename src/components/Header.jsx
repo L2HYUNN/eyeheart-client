@@ -4,6 +4,7 @@ import notification from "../assets/notification.svg";
 import flower from "../assets/flower.svg";
 import avatar from "../assets/avatar.svg";
 import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -45,31 +46,87 @@ const NavList = styled.ul`
     width: 10rem;
   }
 `;
-const NavItem = styled.li``;
+const NavItem = styled.li`
+  position: relative;
+`;
 const NavImg = styled.img`
   width: 4.3rem;
   height: 4.3rem;
   border-radius: 50%;
   margin-right: 2rem;
+  cursor: pointer;
 `;
 const NavNotification = styled.img`
   width: 3rem;
   height: 3rem;
 `;
+const NavMenu = styled.ul`
+  position: absolute;
+  top: ${(props) => (props.menu ? "4rem" : "0")};
+  right: 0rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 14rem;
+  height: 20rem;
+  background-color: rgba(239, 239, 239, 0.8);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 2rem;
+  opacity: ${(props) => (props.menu ? "1" : "0")};
 
-function Header({ user }) {
-  let TextList;
-  if (user) {
-    TextList = [
+  z-index: ${(props) => (props.menu ? "999" : "-1")};
+  transition: all 0.3s linear;
+`;
+const NavMenuItem = styled.li`
+  width: 100%;
+`;
+
+function Header() {
+  const [menu, setMenu] = useState(false);
+  const navRef = useRef(null);
+  const loggedInUser = JSON.parse(localStorage.getItem("user"));
+
+  let navList;
+
+  if (loggedInUser?.user) {
+    navList = [
       { title: "채팅", url: "/chat" },
       { title: "상담", url: "/consulting" },
+      { title: "분석", url: "/analysis" },
     ];
   } else {
-    TextList = [
+    navList = [
       { title: "로그인", url: "/login" },
       { title: "회원가입", url: "/join" },
     ];
   }
+
+  const navMenuList = [
+    { title: "로그 아웃", url: "/logout" },
+    { title: "아이 정보", url: "/child" },
+    { title: "상담 목록", url: "/reservation" },
+  ];
+
+  const showUserMenu = () => {
+    setMenu(!menu);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        navRef.current !== event.target &&
+        !navRef.current.contains(event.target)
+      ) {
+        setMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [navRef]);
 
   return (
     <header>
@@ -85,7 +142,7 @@ function Header({ user }) {
           </Title>
           <Nav>
             <NavList>
-              {TextList.map((list) => {
+              {navList.map((list) => {
                 return (
                   <NavItem key={list.title}>
                     <Link to={list.url}>{list.title}</Link>
@@ -95,16 +152,25 @@ function Header({ user }) {
             </NavList>
             <NavList>
               <NavItem>
-                {user ? (
-                  <Link to={"/mypage/1/reserve"}>
-                    <NavImg src={child} />
-                  </Link>
+                {loggedInUser?.user ? (
+                  <NavImg src={child} onClick={showUserMenu} />
                 ) : (
                   <NavImg src={avatar} />
                 )}
               </NavItem>
               <NavItem>
                 <NavNotification src={notification} />
+              </NavItem>
+              <NavItem>
+                <NavMenu menu={menu} ref={navRef}>
+                  {navMenuList.map((navMenu) => {
+                    return (
+                      <NavMenuItem key={navMenu.title} menu={menu}>
+                        <Link to={navMenu.url}>{navMenu.title}</Link>
+                      </NavMenuItem>
+                    );
+                  })}
+                </NavMenu>
               </NavItem>
             </NavList>
           </Nav>
