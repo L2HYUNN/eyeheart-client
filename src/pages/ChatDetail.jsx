@@ -6,8 +6,8 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useState } from "react";
 import moment from "moment";
-// import { socket } from "../App";
-// import { useEffect } from "react";
+import { socket } from "../App";
+import { useEffect } from "react";
 
 const Main = styled.main`
   display: flex;
@@ -274,27 +274,29 @@ const DummyChat = [
 function ChatDetail() {
   const [date, setDate] = useState(new Date());
   const [chat, setChat] = useState([]);
-  // const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("");
 
-  // const sendMessage = () => {
-  //   socket.emit("message", message);
-  //   setMessage("");
-  // };
+  const sendMessage = (e) => {
+    e.preventDefault();
+    socket.emit("SEND_MESSAGE", { message });
+    setMessage("");
+  };
 
-  // useEffect(() => {
-  //   socket.on("message", (message) => {
-  //     setChat([...chat, message]);
-  //   });
-  // }, [chat]);
+  useEffect(() => {
+    socket.on("RECEIVE_MESSAGE", ({ response, day, time }) => {
+      console.log(response, day, time);
+      // setChat([...chat, message]);
+    });
+  }, [message]);
 
   const sendText = (event) => {
     event.preventDefault();
-    return setChat(event.target.value);
+    return setMessage(event.target.value);
   };
 
   return (
     <>
-      <Header user={true} />
+      <Header />
       <Main>
         <Wrapper>
           <Calendar onChange={setDate} value={date} />
@@ -336,8 +338,8 @@ function ChatDetail() {
             </ChatBox>
           </Contents>
           <ChatForm>
-            <ChatInput onChange={sendText} type="text" value={chat}></ChatInput>
-            <ChatButton>전송</ChatButton>
+            <ChatInput onChange={sendText} type="text" />
+            <ChatButton onClick={sendMessage}>전송</ChatButton>
           </ChatForm>
         </Container>
       </Main>
