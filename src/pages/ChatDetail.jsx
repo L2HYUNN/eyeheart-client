@@ -289,6 +289,10 @@ function ChatDetail() {
     });
   }, [message]);
 
+  useEffect(() => {
+    console.log(chat);
+  }, [chat]);
+
   const sendText = (event) => {
     event.preventDefault();
     return setMessage(event.target.value);
