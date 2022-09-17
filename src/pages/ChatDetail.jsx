@@ -76,9 +76,9 @@ const Chatlog = styled.ul`
   /* justify-content: space-between; */
   overflow-y: scroll;
   height: 90rem;
-  &::-webkit-scrollbar {
+  /* &::-webkit-scrollbar {
     display: none;
-  }
+  } */
   -ms-overflow-style: none;
   scrollbar-width: none;
 `;
@@ -278,25 +278,26 @@ function ChatDetail() {
 
   const sendMessage = (e) => {
     e.preventDefault();
+
+    const now = moment();
+    const day = now.format("YYYYMMDD");
+    const time = now.format("HHmmss");
+
     socket.emit("SEND_MESSAGE", { message });
+
+    setChat((prev) => [...prev, { role: "doll", message, day, time }]);
     setMessage("");
   };
 
   useEffect(() => {
-    socket.on("RECEIVE_MESSAGE", ({ response, day, time }) => {
-      console.log(response, day, time);
-      // setChat([...chat, message]);
+    socket.on("RECEIVE_MESSAGE", ({ response: message, day, time }) => {
+      setChat((prev) => [...prev, { role: "child", message, day, time }]);
     });
-  }, [message]);
+  }, [setChat]);
 
   useEffect(() => {
     console.log(chat);
   }, [chat]);
-
-  const sendText = (event) => {
-    event.preventDefault();
-    return setMessage(event.target.value);
-  };
 
   return (
     <>
@@ -338,11 +339,40 @@ function ChatDetail() {
                     );
                   }
                 })}
+                {chat.map((info) => {
+                  if (info.role === "child") {
+                    return (
+                      <ChildContents key={info.time}>
+                        <ChildImg src={child}></ChildImg>
+                        <ChildInfo>
+                          <ChildName>{info.name || "민영이"}</ChildName>
+                          <ChildChats>
+                            <ChildChat>{info.message}</ChildChat>
+                            <ChildChatTime>{info.time}</ChildChatTime>
+                          </ChildChats>
+                        </ChildInfo>
+                      </ChildContents>
+                    );
+                  } else {
+                    return (
+                      <UserContents key={info.time}>
+                        <UserChats>
+                          <UserChatTime>{info.time}</UserChatTime>
+                          <UserChat>{info.message}</UserChat>
+                        </UserChats>
+                      </UserContents>
+                    );
+                  }
+                })}
               </Chatlog>
             </ChatBox>
           </Contents>
           <ChatForm>
-            <ChatInput onChange={sendText} type="text" />
+            <ChatInput
+              onChange={(e) => setMessage(e.target.value)}
+              type="text"
+              value={message}
+            />
             <ChatButton onClick={sendMessage}>전송</ChatButton>
           </ChatForm>
         </Container>
