@@ -11,6 +11,10 @@ const Container = styled.div`
   justify-content: center;
   border-bottom: 1px solid #d9d9da;
   min-width: 144rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 100%;
+    min-width: max-content;
+  }
 `;
 const Contents = styled.div`
   display: flex;
@@ -19,23 +23,40 @@ const Contents = styled.div`
   padding: 3rem;
   width: 144rem;
   max-width: 144rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 100%;
+    padding: 3rem 2rem;
+  }
 `;
 const Title = styled.div`
   display: flex;
   align-items: center;
+  @media ${({ theme }) => theme.size.small} {
+    width: max-content;
+  }
 `;
 const TitleImg = styled.img`
   width: 4.3rem;
   height: 4.3rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 3rem;
+    height: 3rem;
+  }
 `;
 const TitleName = styled.h1`
   font-family: "Gamja Flower", cursive;
   font-size: 4.5rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 3rem;
+  }
 `;
 const Nav = styled.div`
   display: flex;
   font-size: ${({ theme }) => theme.fontSizes.nav};
   font-weight: ${({ theme }) => theme.fontWeights.nav};
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.4rem;
+  }
 `;
 const NavList = styled.ul`
   display: flex;
@@ -44,6 +65,9 @@ const NavList = styled.ul`
   width: 20rem;
   &:last-child {
     width: 10rem;
+  }
+  @media ${({ theme }) => theme.size.small} {
+    width: 12rem;
   }
 `;
 const NavItem = styled.li`
