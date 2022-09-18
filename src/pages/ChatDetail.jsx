@@ -8,6 +8,7 @@ import { useState } from "react";
 import moment from "moment";
 import { socket } from "../App";
 import { useEffect } from "react";
+import { useRef } from "react";
 
 const Main = styled.main`
   display: flex;
@@ -275,6 +276,11 @@ function ChatDetail() {
   const [date, setDate] = useState(new Date());
   const [chat, setChat] = useState([]);
   const [message, setMessage] = useState("");
+  const scrollRef = useRef(null);
+
+  const scrollToBottom = () => {
+    console.log(scrollRef.current);
+  };
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -297,6 +303,7 @@ function ChatDetail() {
 
   useEffect(() => {
     console.log(chat);
+    scrollToBottom();
   }, [chat]);
 
   return (
@@ -313,7 +320,7 @@ function ChatDetail() {
               <Dates>{moment(date).format("YYYY년 MM월 DD일")}</Dates>
             </DateBox>
             <ChatBox>
-              <Chatlog>
+              <Chatlog ref={scrollRef}>
                 {DummyChat.map((user) => {
                   if (user.role === "child") {
                     return (
