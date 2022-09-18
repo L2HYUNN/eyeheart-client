@@ -2,9 +2,9 @@ import Router from "./router/Router";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { ReactQueryDevtools } from "react-query/devtools";
 import HelmetComponent from "./components/Helmet";
-import theme from "./theme";
 import io from "socket.io-client";
 import { useEffect } from "react";
+import DefaultTheme from "./styles/DefaultTheme";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -80,7 +80,7 @@ function App() {
   }, []);
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={DefaultTheme}>
         <HelmetComponent />
         <GlobalStyle />
         <Router />
