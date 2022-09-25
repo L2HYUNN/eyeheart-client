@@ -68,9 +68,11 @@ html {
 }
 `;
 
-export const socket = io.connect("http://133.186.215.54:5001/realchat", {
+export const socket = io.connect("http://125.6.39.158:5000/realchat", {
   transports: ["websocket"],
 });
+
+socket.emit("SET_CHILD_ID", { serial_number: "abcd1234" });
 
 function App() {
   useEffect(() => {
