@@ -25,7 +25,9 @@ const Contents = styled.div`
   max-width: 144rem;
   @media ${({ theme }) => theme.size.small} {
     width: 100%;
-    padding: 3rem 2rem;
+    max-width: 100vw;
+    padding: 3rem 1.2rem;
+    padding-right: 0.1rem;
   }
 `;
 const Title = styled.div`
@@ -67,7 +69,7 @@ const NavList = styled.ul`
     width: 10rem;
   }
   @media ${({ theme }) => theme.size.small} {
-    width: 12rem;
+    width: 11rem;
   }
 `;
 const NavItem = styled.li`
@@ -79,6 +81,9 @@ const NavImg = styled.img`
   border-radius: 50%;
   margin-right: 2rem;
   cursor: pointer;
+  @media ${({ theme }) => theme.size.small} {
+    margin-right: 1rem;
+  }
 `;
 const NavNotification = styled.img`
   width: 3rem;
