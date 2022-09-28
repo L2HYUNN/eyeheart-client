@@ -16,6 +16,7 @@ const Main = styled.main`
   padding-top: 3rem;
   @media ${({ theme }) => theme.size.small} {
     flex-direction: column-reverse;
+    align-items: center;
     min-width: max-content;
     width: 100%;
     padding-left: 0rem;
@@ -49,6 +50,7 @@ const Container = styled.div`
     min-width: max-content;
     min-height: max-content;
     width: 100%;
+    width: 36.5rem;
     height: 100%;
   }
 `;
@@ -68,7 +70,7 @@ const Contents = styled.div`
   @media ${({ theme }) => theme.size.small} {
     max-width: 100vw;
     max-height: fit-content;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     padding: 1.2rem;
     border-top-left-radius: 0rem;
