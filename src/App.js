@@ -72,7 +72,7 @@ export const socket = io.connect("http://125.6.39.158:5000/realchat", {
   transports: ["websocket"],
 });
 
-socket.emit("SET_CHILD_ID", { serial_number: "abcd1234" });
+socket.emit("join", { serial_number: "abcd1234", type: "SUPERVISOR" });
 
 function App() {
   useEffect(() => {

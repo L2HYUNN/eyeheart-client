@@ -289,7 +289,7 @@ function ChatDetail() {
     const day = now.format("YYYYMMDD");
     const time = now.format("HHmmss");
 
-    socket.emit("SEND_MESSAGE", { message });
+    socket.emit("SEND_MESSAGE", { type: "SUPERVISOR", message });
 
     setChat((prev) => [...prev, { role: "doll", message, day, time }]);
     setMessage("");
