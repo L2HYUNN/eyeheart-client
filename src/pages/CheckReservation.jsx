@@ -13,6 +13,12 @@ const Main = styled.main`
   justify-content: center;
   min-width: 144rem;
   padding-top: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    justify-content: center;
+    min-width: fit-content;
+    max-width: 100vw;
+    width: 100%;
+  }
 `;
 const Wrapper = styled.div`
   display: flex;
@@ -21,6 +27,9 @@ const Wrapper = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 2rem;
   padding: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 100vw;
+  }
 `;
 const Section = styled.div`
   display: flex;
@@ -37,6 +46,12 @@ const Section = styled.div`
     width: 68rem;
     margin-right: 2rem;
     border-right: 1px solid rgba(0, 0, 0, 0.2);
+    @media ${({ theme }) => theme.size.small} {
+      display: none;
+    }
+  }
+  @media ${({ theme }) => theme.size.small} {
+    width: 100vw;
   }
 `;
 const Reservation = styled.div`
@@ -49,27 +64,46 @@ const Reservation = styled.div`
   padding: 2rem;
   margin-bottom: 5rem;
   border-radius: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    justify-content: space-between;
+    width: 100%;
+  }
 `;
 const ReservationImg = styled.img`
   width: 10rem;
   height: 10rem;
   border-radius: 50%;
   margin-right: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    display: none;
+    width: 7rem;
+    height: 7rem;
+  }
 `;
 const ReservationContents = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 2.8rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.8rem;
+  }
 `;
 const ReservationName = styled.span`
   font-size: 2.4rem;
   margin-bottom: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.8rem;
+  }
 `;
 const ReservationDate = styled.span`
   display: flex;
   font-size: 1.8rem;
   opacity: 0.4;
   margin-bottom: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: max-content;
+    font-size: 1.6rem;
+  }
 `;
 const ReservationDateImg = styled.img`
   width: 2rem;
@@ -80,6 +114,10 @@ const ReservationTime = styled.span`
   display: flex;
   font-size: 1.8rem;
   opacity: 0.4;
+  @media ${({ theme }) => theme.size.small} {
+    width: max-content;
+    font-size: 1.6rem;
+  }
 `;
 const ReservationTimeImg = styled.img`
   width: 2rem;
@@ -90,9 +128,18 @@ const ReservationBtns = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 6rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 100%;
+    margin-left: 2rem;
+  }
 `;
 const ReservationResultBtns = styled.div`
   margin-bottom: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
 `;
 const ReservationSucessBtn = styled.button`
   width: 12rem;
@@ -111,6 +158,11 @@ const ReservationSucessBtn = styled.button`
     background-color: ${({ theme }) => theme.colors.pink};
   }
   cursor: pointer;
+  @media ${({ theme }) => theme.size.small} {
+    width: 100%;
+    font-size: 1.4rem;
+    margin-right: 1rem;
+  }
 `;
 const ReservationCancelBtn = styled.button`
   width: 12rem;
@@ -129,6 +181,11 @@ const ReservationCancelBtn = styled.button`
     background-color: ${({ theme }) => theme.colors.pink};
   }
   cursor: pointer;
+  @media ${({ theme }) => theme.size.small} {
+    width: 100%;
+    font-size: 1.4rem;
+    margin-right: 0;
+  }
 `;
 const ReservationDetailBtn = styled.button`
   width: 26rem;
@@ -147,6 +204,10 @@ const ReservationDetailBtn = styled.button`
     background-color: ${({ theme }) => theme.colors.pink};
   }
   cursor: pointer;
+  @media ${({ theme }) => theme.size.small} {
+    width: 100%;
+    font-size: 1.4rem;
+  }
 `;
 const Intro = styled.div`
   display: flex;
