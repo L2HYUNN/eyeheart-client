@@ -20,10 +20,21 @@ const Container = styled.main`
   min-width: 144rem;
   padding-top: 10rem;
   padding-left: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    min-width: max-content;
+    width: 100%;
+    padding-left: 0rem;
+    padding-top: 7rem;
+  }
 `;
 const Info = styled.div`
   display: flex;
   width: 144rem;
+  @media ${({ theme }) => theme.size.small} {
+    display: block;
+    width: 100%;
+    padding: 0 2rem;
+  }
 `;
 const InfoContents = styled.div`
   display: flex;
@@ -35,11 +46,19 @@ const InfoTitle = styled.span`
   width: 70rem;
   line-height: 4rem;
   margin-bottom: 7rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 2.4rem;
+    width: 35rem;
+    margin-bottom: 3rem;
+  }
 `;
 const InfoSubTitle = styled.span`
   font-size: 1.8rem;
   color: rgba(0, 0, 0, 0.5);
   line-height: 2.4rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 const InfoButton = styled.button`
   width: fit-content;
@@ -55,8 +74,18 @@ const InfoButton = styled.button`
   a {
     color: white;
   }
+  @media ${({ theme }) => theme.size.small} {
+    width: max-content;
+    font-size: 1.4rem;
+    margin-top: 10rem;
+  }
 `;
-const InfoSubContents = styled.div``;
+const InfoSubContents = styled.div`
+  @media ${({ theme }) => theme.size.small} {
+    display: flex;
+    justify-content: center;
+  }
+`;
 const InfoImg = styled.img`
   width: 72rem;
   height: 36rem;
@@ -64,12 +93,22 @@ const InfoImg = styled.img`
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   border-radius: 2rem;
   margin-top: 20rem;
+  @media ${({ theme }) => theme.size.small} {
+    display: flex;
+    justify-content: center;
+    width: 90vw;
+    height: 20rem;
+    margin-top: 5rem;
+  }
 `;
 const Arrow = styled.img`
   width: 4.3rem;
   height: 4rem;
   margin: 25rem 0;
   opacity: 0.4;
+  @media ${({ theme }) => theme.size.small} {
+    margin: 5rem 0;
+  }
 `;
 
 const ChatInfo = styled.div`
@@ -85,21 +124,52 @@ const ChatInfoContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 144rem;
+  @media ${({ theme }) => theme.size.small} {
+    display: block;
+    width: 100%;
+    padding: 0 2rem;
+  }
 `;
-const ChatInfoSubContents = styled.div``;
+const ChatInfoSubContents = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 const ChatInfoImg = styled.img`
   width: 48rem;
   height: 65rem;
   border-radius: 2rem;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  @media ${({ theme }) => theme.size.small} {
+    width: 30rem;
+    height: 50rem;
+    margin-bottom: 5rem;
+    margin-top: 1rem;
+  }
 `;
-const ChatInfoContents = styled(InfoContents)``;
+const ChatInfoContents = styled(InfoContents)`
+  @media ${({ theme }) => theme.size.small} {
+    align-items: flex-end;
+    margin-bottom: 1rem;
+  }
+`;
 const ChatInfoTitle = styled(InfoTitle)`
   font-size: 3.2rem;
   margin-bottom: 5rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 30rem;
+    font-size: 2.4rem;
+    margin-bottom: 3rem;
+    text-align: right;
+  }
 `;
-const ChatInfoSubTitle = styled(InfoSubTitle)``;
+const ChatInfoSubTitle = styled(InfoSubTitle)`
+  @media ${({ theme }) => theme.size.small} {
+    width: 34rem;
+    font-size: 1.6rem;
+    text-align: right;
+  }
+`;
 
 const ReportInfo = styled.div`
   display: flex;
@@ -107,16 +177,44 @@ const ReportInfo = styled.div`
   align-items: center;
   width: 100%;
   height: 80rem;
+  @media ${({ theme }) => theme.size.small} {
+    align-items: flex-start;
+    height: 100%;
+    padding: 3rem 0;
+  }
 `;
 const ReportInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 144rem;
+  @media ${({ theme }) => theme.size.small} {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    padding: 0 2rem;
+  }
 `;
-const ReportInfoContents = styled(ChatInfoContents)``;
-const ReportInfoTitle = styled(ChatInfoTitle)``;
-const ReportInfoSubTitle = styled(ChatInfoSubTitle)``;
+const ReportInfoContents = styled(ChatInfoContents)`
+  @media ${({ theme }) => theme.size.small} {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+`;
+const ReportInfoTitle = styled(ChatInfoTitle)`
+  @media ${({ theme }) => theme.size.small} {
+    width: 28rem;
+    font-size: 2.4rem;
+    margin-bottom: 3rem;
+    text-align: left;
+  }
+`;
+const ReportInfoSubTitle = styled(ChatInfoSubTitle)`
+  @media ${({ theme }) => theme.size.small} {
+    width: 34rem;
+    text-align: left;
+  }
+`;
 const ReportInfoSubContents = styled.div`
   display: flex;
   flex-direction: column;
@@ -132,6 +230,12 @@ const ReportInfoImg = styled(ChatInfoImg)`
   &:last-child {
     margin-left: 10rem;
   }
+  @media ${({ theme }) => theme.size.small} {
+    width: 26rem;
+    height: 15rem;
+    margin-left: 0;
+    margin-bottom: 5rem;
+  }
 `;
 const MobileInfo = styled.div`
   display: flex;
@@ -140,15 +244,27 @@ const MobileInfo = styled.div`
   width: 100%;
   height: 80rem;
   background-color: #efefef;
+  @media ${({ theme }) => theme.size.small} {
+    align-items: flex-start;
+    padding: 3rem 0;
+  }
 `;
 const MobileInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 144rem;
+  @media ${({ theme }) => theme.size.small} {
+    display: block;
+    width: 100%;
+    padding: 0 2rem;
+  }
 `;
 const MobileInfoSubContents = styled.div`
   display: flex;
+  @media ${({ theme }) => theme.size.small} {
+    justify-content: space-between;
+  }
 `;
 const MobileInfoImg = styled.img`
   width: 25rem;
@@ -157,22 +273,47 @@ const MobileInfoImg = styled.img`
   border-radius: 2rem;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  @media ${({ theme }) => theme.size.small} {
+    width: 10rem;
+    height: 50rem;
+    margin-right: 0;
+    margin-bottom: 5rem;
+  }
 `;
 const MobileInfoContents = styled(InfoContents)`
   overflow: hidden;
   padding-left: 10rem;
+  @media ${({ theme }) => theme.size.small} {
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-left: 0;
+  }
 `;
 const MobileInfoTitle = styled(InfoTitle)`
   font-size: 3.2rem;
   margin-bottom: 5rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 20rem;
+    font-size: 2.4rem;
+    margin-bottom: 3rem;
+    text-align: right;
+  }
 `;
-const MobileInfoSubTitle = styled(InfoSubTitle)``;
+const MobileInfoSubTitle = styled(InfoSubTitle)`
+  @media ${({ theme }) => theme.size.small} {
+    text-align: right;
+  }
+`;
 const LastInfo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 80rem;
+  @media ${({ theme }) => theme.size.small} {
+    height: 100%;
+    margin: 15rem 2rem;
+  }
 `;
 const LastInfoContents = styled.div`
   display: flex;
@@ -181,6 +322,9 @@ const LastInfoContents = styled.div`
 `;
 const LastInfoTitle = styled.h1`
   font-size: 2.4rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.8rem;
+  }
 `;
 const LastInfoButton = styled(InfoButton)`
   margin-top: 5rem;
@@ -219,19 +363,19 @@ function Home() {
             </ChatInfoSubContents>
             <ChatInfoContents>
               <ChatInfoTitle>
-                실시간으로 아이의 대화 로그를 확인하세요.
+                실시간으로 아이와 대화하고 대화 로그를 확인하세요.
               </ChatInfoTitle>
               <ChatInfoSubTitle>
-                마음인형과 아이간의 대화 내용이 실시간으로 제공됩니다.
+                아이마음 인형을 통해 아이와 대화해보세요.
               </ChatInfoSubTitle>
               <ChatInfoSubTitle>
-                대화 로그를 통해 내 아이의 진짜 마음을 알아보세요!
+                아이의 숨은 마음을 알아 볼 수 있습니다.
               </ChatInfoSubTitle>
               <ChatInfoSubTitle>
-                추후 실시간 대화 기능이 추가 제공됩니다.
+                인형과 아이의 대화 내용이 실시간으로 제공됩니다.
               </ChatInfoSubTitle>
               <ChatInfoSubTitle>
-                인형을 통한 실시간 대화를 통해 아이의 솔직한 마음을 알아보세요!
+                대화 로그를 통해 아이의 진짜 마음을 알아보세요!
               </ChatInfoSubTitle>
             </ChatInfoContents>
           </ChatInfoContainer>

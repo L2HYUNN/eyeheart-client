@@ -13,10 +13,20 @@ const Main = styled.main`
   align-items: center;
   min-width: 144rem;
   padding-top: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    justify-content: center;
+    min-width: fit-content;
+    max-width: 100vw;
+    width: 100%;
+  }
 `;
 const Wrapper = styled.div`
   display: flex;
   width: 140rem;
+  @media ${({ theme }) => theme.size.small} {
+    flex-direction: column;
+    width: 90vw;
+  }
 `;
 const PersonInfo = styled.div`
   display: flex;
@@ -29,11 +39,20 @@ const PersonInfo = styled.div`
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   padding: 2rem;
   margin-right: 5rem;
+  @media ${({ theme }) => theme.size.small} {
+    display: none;
+    width: 90vw;
+    height: fit-content;
+    margin-bottom: 3rem;
+  }
 `;
 const PersonTitle = styled.h1`
   font-weight: 600;
   font-size: 2.8rem;
   margin-bottom: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 2rem;
+  }
 `;
 const PersonText = styled.span`
   font-size: 2.2rem;
@@ -44,6 +63,11 @@ const PersonText = styled.span`
   margin-bottom: 5rem;
   padding-bottom: 5rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+  }
 `;
 const Person = styled.img`
   width: 25rem;
@@ -51,12 +75,22 @@ const Person = styled.img`
   border-radius: 13rem;
   margin-bottom: 2rem;
   margin-top: 5rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 7rem;
+    margin-top: 2rem;
+  }
 `;
 const PersonTime = styled.div`
   display: flex;
   width: 35rem;
   font-size: 1.8rem;
   margin-bottom: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 100%;
+    font-size: 1.6rem;
+  }
 `;
 const PersonTimeTitle = styled.h1`
   font-weight: 600;
@@ -72,6 +106,10 @@ const PersonCareer = styled.div`
   font-size: 1.8rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 100%;
+    font-size: 1.6rem;
+  }
 `;
 const PersonCareerTitle = styled.h1`
   font-weight: 600;
@@ -91,33 +129,58 @@ const ReservationInfo = styled.div`
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   padding: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 90vw;
+    height: fit-content;
+    margin-bottom: 3rem;
+  }
 `;
 const ReservationTitle = styled.h1`
   font-weight: 600;
   font-size: 2.8rem;
   margin-bottom: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 2rem;
+  }
 `;
 const ReservationDate = styled.div`
   width: 90rem;
   font-size: 2.6rem;
   margin-bottom: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 80vw;
+  }
 `;
 const ReservationDateImg = styled.img`
   width: 2.5rem;
   height: 2.5rem;
   margin-right: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 2rem;
+    height: 2rem;
+  }
 `;
 const ReservationDateTitle = styled.h2`
   display: flex;
   margin-bottom: 2rem;
   font-size: 2.4rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 const ReservationDateInfo = styled.p`
   opacity: 0.6;
   margin-bottom: 2rem;
   font-size: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
-const ReservationDateContext = styled.div``;
+const ReservationDateContext = styled.div`
+  @media ${({ theme }) => theme.size.small} {
+    width: 90vw;
+  }
+`;
 const ReservationDateButton = styled.button`
   width: 15rem;
   height: 5rem;
@@ -137,28 +200,48 @@ const ReservationDateButton = styled.button`
       : "rgba(0, 0, 0, 0.2)";
   }};
   cursor: pointer;
+  @media ${({ theme }) => theme.size.small} {
+    height: 4rem;
+    width: 14rem;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+  }
 `;
 const ReservationTime = styled.div`
   width: 90rem;
   font-size: 2.6rem;
   margin-bottom: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 80vw;
+  }
 `;
 const ReservationTimeImg = styled.img`
   width: 2.5rem;
   height: 2.5rem;
   margin-right: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 2rem;
+    height: 2rem;
+  }
 `;
 const ReservationTimeTitle = styled.h2`
   display: flex;
   margin-bottom: 2rem;
   font-size: 2.4rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 // const ReservationTimeInfo = styled.p`
 //   opacity: 0.6;
 //   margin-bottom: 2rem;
 //   font-size: 2rem;
 // `;
-const ReservationTimeContext = styled.div``;
+const ReservationTimeContext = styled.div`
+  @media ${({ theme }) => theme.size.small} {
+    width: 90vw;
+  }
+`;
 const ReservationTimeButton = styled.button`
   width: 15rem;
   height: 5rem;
@@ -179,26 +262,45 @@ const ReservationTimeButton = styled.button`
       : "rgba(0, 0, 0, 0.2)";
   }};
   cursor: pointer;
+  @media ${({ theme }) => theme.size.small} {
+    width: 14rem;
+    font-size: 1.4rem;
+    height: 4rem;
+    border-radius: 1rem;
+  }
 `;
 const ReservationContent = styled.div`
   position: relative;
   width: 90rem;
   font-size: 2.6rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 80vw;
+  }
 `;
 const ReservationContentImg = styled.img`
   width: 2.5rem;
   height: 2.5rem;
   margin-right: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 2rem;
+    height: 2rem;
+  }
 `;
 const ReservationContentTitle = styled.h2`
   display: flex;
   margin-bottom: 2rem;
   font-size: 2.4rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.8rem;
+  }
 `;
 const ReservationContentInfo = styled.p`
   opacity: 0.6;
   margin-bottom: 2rem;
   font-size: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 const ReservationContentTextArea = styled.textarea`
   width: 90rem;
@@ -209,6 +311,13 @@ const ReservationContentTextArea = styled.textarea`
   outline-color: ${({ theme }) => theme.colors.pink};
   &::placeholder {
     font-size: 1.8rem;
+  }
+  @media ${({ theme }) => theme.size.small} {
+    width: 80vw;
+    font-size: 1.4rem;
+    &::placeholder {
+      font-size: 1.4rem;
+    }
   }
 `;
 const ReservationButton = styled.button`
@@ -237,7 +346,12 @@ const ReservationButton = styled.button`
     return props.active?.text && props.active.time !== "시간 선택"
       ? "pointer"
       : null;
-  }}; ;
+  }};
+  @media ${({ theme }) => theme.size.small} {
+    height: 4rem;
+    font-size: 1.4rem;
+    border-radius: 1rem;
+  }
 `;
 
 const dummyCareer = [
@@ -270,14 +384,15 @@ function Reserve() {
     });
   };
   const reserverTime = (event) => {
+    const time = event.target.innerText;
     return setReservation((data) => {
-      return { ...data, time: event.target.innerText };
+      return { ...data, time };
     });
   };
   const reserveText = (event) => {
-    console.log(event.target.value);
+    const text = event.target.value;
     return setReservation((data) => {
-      return { ...data, text: event.target.value };
+      return { ...data, text };
     });
   };
   const time = [

@@ -14,6 +14,14 @@ const Main = styled.main`
   justify-content: center;
   min-width: 144rem;
   padding-top: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    flex-direction: column-reverse;
+    align-items: center;
+    min-width: max-content;
+    width: 100%;
+    padding-left: 0rem;
+    padding-top: 0;
+  }
 `;
 const Wrapper = styled.div`
   display: flex;
@@ -36,6 +44,15 @@ const Container = styled.div`
   align-items: center;
   width: 100rem;
   height: 120rem;
+  @media ${({ theme }) => theme.size.small} {
+    position: relative;
+    align-items: flex-start;
+    min-width: max-content;
+    min-height: max-content;
+    width: 100%;
+    width: 36.5rem;
+    height: 100%;
+  }
 `;
 const Contents = styled.div`
   display: flex;
@@ -50,6 +67,15 @@ const Contents = styled.div`
   padding: 2rem 4rem;
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    max-width: 100vw;
+    max-height: fit-content;
+    width: 100vw;
+    height: 100%;
+    padding: 1.2rem;
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
+  }
 `;
 const DateBox = styled.div`
   display: flex;
@@ -57,18 +83,27 @@ const DateBox = styled.div`
   align-items: center;
   width: 30rem;
   height: 4rem;
-  /* background-color: ${({ theme }) => theme.colors.darkPink}; */
   border-radius: 2rem;
   margin-bottom: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: fit-content;
+    margin-bottom: 1rem;
+  }
 `;
 const Dates = styled.div`
   font-size: 2rem;
   font-weight: 600;
   color: white;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.8rem;
+  }
 `;
 const ChatBox = styled.div`
   width: 100%;
-  height: 100%;
+  @media ${({ theme }) => theme.size.small} {
+    max-height: fit-content;
+    height: 100%;
+  }
 `;
 const Chatlog = styled.ul`
   display: flex;
@@ -81,6 +116,10 @@ const Chatlog = styled.ul`
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
+  @media ${({ theme }) => theme.size.small} {
+    /* max-height: fit-content; */
+    height: 70vh;
+  }
 `;
 const ChildContents = styled.li`
   display: flex;
@@ -92,16 +131,25 @@ const ChildImg = styled.img`
   height: 6rem;
   border-radius: 50%;
   margin-right: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 4rem;
+    height: 4rem;
+    min-width: 4rem;
+    min-height: 4rem;
+  }
 `;
 const ChildInfo = styled.div``;
 const ChildName = styled.div`
   font-weight: 500;
   font-size: 1.8rem;
   margin-bottom: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 const ChildChats = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 `;
 const ChildChat = styled.div`
   font-size: 1.8rem;
@@ -110,10 +158,17 @@ const ChildChat = styled.div`
   border-radius: 1rem;
   max-width: 50rem;
   line-height: 2.2rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    max-width: 80%;
+    padding: 1rem;
+  }
 `;
 const ChildChatTime = styled.div`
   padding-left: 1rem;
   padding-top: 1.5rem;
+  padding-bottom: 0.8rem;
 `;
 const UserContents = styled.li`
   display: flex;
@@ -123,7 +178,8 @@ const UserContents = styled.li`
 `;
 const UserChats = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-end;
 `;
 const UserChat = styled.div`
   font-size: 1.8rem;
@@ -132,10 +188,16 @@ const UserChat = styled.div`
   border-radius: 1rem;
   max-width: 50rem;
   line-height: 2.2rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    max-width: 80%;
+  }
 `;
 const UserChatTime = styled.div`
   padding-right: 1rem;
   padding-top: 1.5rem;
+  padding-bottom: 1rem;
 `;
 const ChatForm = styled.form`
   width: 90rem;
@@ -143,6 +205,11 @@ const ChatForm = styled.form`
   border: none;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  @media ${({ theme }) => theme.size.small} {
+    max-width: 100vw;
+    width: 100%;
+    height: 10rem;
+  }
 `;
 const ChatInput = styled.input`
   width: 70rem;
@@ -151,6 +218,12 @@ const ChatInput = styled.input`
   border: none;
   outline: none;
   padding: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+    min-width: max-content;
+    width: 80%;
+    height: 10rem;
+  }
 `;
 const ChatButton = styled.button`
   width: 17rem;
@@ -162,6 +235,11 @@ const ChatButton = styled.button`
   font-size: 2rem;
   font-weight: 600;
   border-radius: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    min-width: max-content;
+    width: 20%;
+    height: 8rem;
+  }
 `;
 
 const DummyChat = [
