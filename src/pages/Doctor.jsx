@@ -159,12 +159,18 @@ const ClinicTitle = styled.h3`
   font-size: 1.8rem;
   font-weight: 600;
   margin-bottom: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 const ClinicText = styled.span`
   font-size: 1.8rem;
   margin-bottom: 1rem;
   line-height: 2rem;
   opacity: 0.6;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 const ClinicCenterTitle = styled.h3`
   font-size: 1.8rem;
@@ -173,12 +179,18 @@ const ClinicCenterTitle = styled.h3`
   padding-top: 2.5rem;
   margin-bottom: 2rem;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 const ClinicCenterText = styled.span`
   font-size: 1.8rem;
   margin-bottom: 1rem;
   line-height: 2rem;
   opacity: 0.6;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 const ClinicCenterButton = styled.button`
   display: flex;
@@ -201,6 +213,9 @@ const ClinicCenterButton = styled.button`
     color: white;
   }
   @media ${({ theme }) => theme.size.small} {
+    font-size: 1.4rem;
+    padding: 2rem 4rem;
+    height: 4rem;
     right: 1rem;
     bottom: 1rem;
   }
