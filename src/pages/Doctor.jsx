@@ -14,10 +14,20 @@ const Main = styled.main`
   align-items: center;
   min-width: 144rem;
   padding-top: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    justify-content: center;
+    min-width: fit-content;
+    max-width: 100vw;
+    width: 100%;
+  }
 `;
 const Wrapper = styled.div`
   display: flex;
   width: 140rem;
+  @media ${({ theme }) => theme.size.small} {
+    flex-direction: column;
+    width: 90vw;
+  }
 `;
 const PersonInfo = styled.div`
   display: flex;
@@ -30,11 +40,19 @@ const PersonInfo = styled.div`
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   padding: 2rem;
   margin-right: 5rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 90vw;
+    height: fit-content;
+    margin-bottom: 3rem;
+  }
 `;
 const PersonTitle = styled.h1`
   font-weight: 600;
   font-size: 2.8rem;
   margin-bottom: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 2rem;
+  }
 `;
 const PersonText = styled.span`
   font-size: 2.2rem;
@@ -45,6 +63,11 @@ const PersonText = styled.span`
   margin-bottom: 5rem;
   padding-bottom: 5rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+  }
 `;
 const Person = styled.img`
   width: 25rem;
@@ -52,12 +75,22 @@ const Person = styled.img`
   border-radius: 13rem;
   margin-bottom: 2rem;
   margin-top: 5rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 7rem;
+    margin-top: 2rem;
+  }
 `;
 const PersonTime = styled.div`
   display: flex;
   width: 35rem;
   font-size: 1.8rem;
   margin-bottom: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 100%;
+    font-size: 1.6rem;
+  }
 `;
 const PersonTimeTitle = styled.h1`
   font-weight: 600;
@@ -73,6 +106,10 @@ const PersonCareer = styled.div`
   font-size: 1.8rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 100%;
+    font-size: 1.6rem;
+  }
 `;
 const PersonCareerTitle = styled.h1`
   font-weight: 600;
@@ -88,11 +125,19 @@ const ClinicInfo = styled.div`
   flex-direction: column;
   width: 95rem;
   border-radius: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 90vw;
+  }
 `;
 const ClinicIntro = styled.div`
   display: flex;
   width: 95rem;
   height: 41.5rem;
+  @media ${({ theme }) => theme.size.small} {
+    display: block;
+    width: 100vw;
+    height: 100%;
+  }
 `;
 const ClinicTexts = styled.div`
   position: relative;
@@ -105,6 +150,10 @@ const ClinicTexts = styled.div`
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   border-radius: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 90vw;
+    margin-bottom: 3rem;
+  }
 `;
 const ClinicTitle = styled.h3`
   font-size: 1.8rem;
@@ -151,6 +200,10 @@ const ClinicCenterButton = styled.button`
   a {
     color: white;
   }
+  @media ${({ theme }) => theme.size.small} {
+    right: 1rem;
+    bottom: 1rem;
+  }
 `;
 const Promotion = styled.img`
   width: 95rem;
@@ -158,11 +211,22 @@ const Promotion = styled.img`
   border-radius: 2rem;
   opacity: 0.8;
   margin-bottom: 5rem;
+  @media ${({ theme }) => theme.size.small} {
+    max-width: 100vw;
+    width: 90vw;
+    height: 25rem;
+    margin-bottom: 3rem;
+  }
 `;
 const ClinicMap = styled.div`
   width: 45rem;
   height: 45rem;
   border-radius: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 90vw;
+    height: 30rem;
+    text-align: center;
+  }
 `;
 
 const dummyCareer = [
