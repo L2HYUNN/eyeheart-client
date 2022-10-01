@@ -5,6 +5,8 @@ import RightArrow from "../assets/right-arrow.svg";
 import Hand from "../assets/hand.jpeg";
 import Time from "../assets/time.svg";
 import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
+import { getConsultings } from "../api/api";
 
 const Main = styled.main`
   display: flex;
@@ -90,11 +92,13 @@ const DoctorImg = styled.img`
   }
 `;
 const DoctorInfo = styled.div`
-  margin-right: 12rem;
+  width: 21rem;
+  margin-right: 6rem;
   font-weight: 400;
   @media ${({ theme }) => theme.size.small} {
+    width: 40vw;
     margin: 2rem;
-    margin-right: 8rem;
+    margin-right: 3rem;
   }
 `;
 const DoctorTitle = styled.h2`
@@ -109,6 +113,7 @@ const DoctorHome = styled.h3`
   margin-bottom: 1rem;
   opacity: 0.4;
   @media ${({ theme }) => theme.size.small} {
+    width: 100%;
     margin-right: 1rem;
     font-size: 1.4rem;
   }
@@ -140,29 +145,9 @@ const Arrow = styled.img`
   }
 `;
 
-const dummyDoctor = [
-  {
-    id: 1,
-    name: "고재천 상담사",
-    home: "코코상담원",
-    time: "00:00 ~ 23:40",
-  },
-  {
-    id: 1,
-    name: "고재천 상담사",
-    home: "코코상담원",
-    time: "00:00 ~ 23:40",
-  },
-  { id: 1, name: "고재천 상담사", home: "코코상담원", time: "00:00 ~ 23:40" },
-  { id: 1, name: "고재천 상담사", home: "코코상담원", time: "00:00 ~ 23:40" },
-  { id: 1, name: "고재천 상담사", home: "코코상담원", time: "00:00 ~ 23:40" },
-  { id: 1, name: "고재천 상담사", home: "코코상담원", time: "00:00 ~ 23:40" },
-  { id: 1, name: "고재천 상담사", home: "코코상담원", time: "00:00 ~ 23:40" },
-  { id: 1, name: "고재천 상담사", home: "코코상담원", time: "00:00 ~ 23:40" },
-  { id: 1, name: "고재천 상담사", home: "코코상담원", time: "00:00 ~ 23:40" },
-];
-
 function Consulting() {
+  const { isLoading, data } = useQuery("consultings", getConsultings);
+
   return (
     <>
       <Header />
@@ -171,28 +156,32 @@ function Consulting() {
         <Infos>
           <Title>아이마음 비대면상담</Title>
           <Doctors>
-            {dummyDoctor.map((doctor) => {
-              return (
-                <Doctor>
-                  <Link to={`/consulting/${doctor.id}`}>
-                    <DoctorImg />
-                  </Link>
-                  <Link to={`/consulting/${doctor.id}`}>
-                    <DoctorInfo>
-                      <DoctorTitle>{doctor.name}</DoctorTitle>
-                      <DoctorHome>{doctor.home}</DoctorHome>
-                      <DoctorTime>
-                        <DoctorTimeImg src={Time} />
-                        {doctor.time}
-                      </DoctorTime>
-                    </DoctorInfo>
-                  </Link>
-                  <Link to={`/consulting/${doctor.id}`}>
-                    <Arrow src={RightArrow} />
-                  </Link>
-                </Doctor>
-              );
-            })}
+            {!isLoading
+              ? data.data.counselors.map((doctor) => {
+                  return (
+                    <Doctor key={doctor.profile.id}>
+                      <Link to={`/consulting/${doctor.profile.id}`}>
+                        <DoctorImg src={doctor.profile.thumbnail} />
+                      </Link>
+                      <Link to={`/consulting/${doctor.profile.id}`}>
+                        <DoctorInfo>
+                          <DoctorTitle>
+                            {doctor.profile.name} 상담사
+                          </DoctorTitle>
+                          <DoctorHome>{doctor.profile.breif}</DoctorHome>
+                          <DoctorTime>
+                            <DoctorTimeImg src={Time} />
+                            {`${doctor.times.open} ~ ${doctor.times.close}`}
+                          </DoctorTime>
+                        </DoctorInfo>
+                      </Link>
+                      <Link to={`/consulting/${doctor.profile.id}`}>
+                        <Arrow src={RightArrow} />
+                      </Link>
+                    </Doctor>
+                  );
+                })
+              : null}
           </Doctors>
         </Infos>
       </Main>
