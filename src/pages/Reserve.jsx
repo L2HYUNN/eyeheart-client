@@ -6,6 +6,11 @@ import Calendar from "../assets/calendar.svg";
 import Time from "../assets/time2.svg";
 import Chat from "../assets/chats.svg";
 import { useState } from "react";
+import moment from "moment";
+import { useNavigate, useParams } from "react-router-dom";
+import { useMutation, useQuery } from "react-query";
+import { getConsultingsDetail, postConsultingReservation } from "../api/api";
+import { useEffect } from "react";
 
 const Main = styled.main`
   display: flex;
@@ -354,46 +359,80 @@ const ReservationButton = styled.button`
   }
 `;
 
-const dummyCareer = [
-  "서울 신학대 상담대학원 상담학 석사 졸업",
-  "미네소타 대학원 신학 박사 졸업",
-  "한국심리상담센터 대표",
-  "한국기업상담학회 이사",
-  "한국기업심리상담센터 원장",
-  "한국우울증연구소 소장",
-  "한국분노연구소 소장",
-  "현대자동차, 기아자동차 본사 상담사",
-];
-
 function Reserve() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const [reservation, setReservation] = useState({
     date: "오늘",
     time: "시간 선택",
     text: "",
   });
+  const [postReservation, setPostReservation] = useState({
+    day: moment(new Date()).format("MM월 DD일"),
+    begin: "0000",
+    end: "0000",
+    user_id: JSON.parse(localStorage.getItem("user")).userId,
+    counselor_id: +id,
+    content: "",
+  });
+  const [date, setDate] = useState();
+  const [profile, setProfile] = useState({});
+
+  const { isLoading, data } = useQuery("doctorDetail", () =>
+    getConsultingsDetail(id)
+  );
+  const { mutate, isSuccess } = useMutation(postConsultingReservation);
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/");
+    }
+  }, [isSuccess, navigate]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setProfile({ ...data.data.profile });
+    }
+  }, [isLoading, data]);
 
   const reserveDateToday = () => {
-    return setReservation((data) => {
+    setDate(moment(new Date()).format("MM월 DD일"));
+    setReservation((data) => {
       return { ...data, date: "오늘" };
     });
+    setPostReservation({ ...postReservation, day: date });
   };
 
   const reserveDateTomorrow = () => {
-    return setReservation((data) => {
+    setDate(moment(new Date()).add(1, "d").format("MM월 DD일"));
+    setReservation((data) => {
       return { ...data, date: "내일" };
     });
+    setPostReservation({ ...postReservation, day: date });
   };
+
   const reserverTime = (event) => {
-    const time = event.target.innerText;
-    return setReservation((data) => {
-      return { ...data, time };
+    const begin = event.target.innerText;
+    const end = event.target.nextSibling?.innerText ?? "";
+
+    setReservation((data) => {
+      return { ...data, time: begin };
     });
+    setPostReservation({ ...postReservation, begin, end });
   };
+
   const reserveText = (event) => {
     const text = event.target.value;
-    return setReservation((data) => {
+    setReservation((data) => {
       return { ...data, text };
     });
+    setPostReservation({ ...postReservation, content: text });
+  };
+
+  const requestReservation = () => {
+    console.log(postReservation);
+    mutate(JSON.stringify(postReservation));
   };
   const time = [
     "09:00",
@@ -416,25 +455,31 @@ function Reserve() {
       <Main>
         <Wrapper>
           <PersonInfo>
-            <Person src={PersonImg} />
-            <PersonTitle>고재천 상담사</PersonTitle>
-            <PersonText>코코의원</PersonText>
-            <PersonTime>
-              <PersonTimeTitle>상담시간</PersonTimeTitle>
-              <PersonTimeText>00:00 ~ 23:40 (일)</PersonTimeText>
-            </PersonTime>
-            <PersonTime>
-              <PersonTimeTitle>점심시간</PersonTimeTitle>
-              <PersonTimeText>없음</PersonTimeText>
-            </PersonTime>
-            <PersonCareer>
-              <PersonCareerTitle>약력</PersonCareerTitle>
-              {dummyCareer.map((career) => {
-                return (
-                  <PersonCareerText key={career}>{career}</PersonCareerText>
-                );
-              })}
-            </PersonCareer>
+            {!isLoading ? (
+              <>
+                <Person src={profile?.thumbnail} />
+                <PersonTitle>{profile?.name} 상담사</PersonTitle>
+                <PersonText>{profile?.breif}</PersonText>
+                <PersonTime>
+                  <PersonTimeTitle>상담시간</PersonTimeTitle>
+                  <PersonTimeText>
+                    {profile?.available?.open} ~ {profile?.available?.close}
+                  </PersonTimeText>
+                </PersonTime>
+                <PersonTime>
+                  <PersonTimeTitle>점심시간</PersonTimeTitle>
+                  <PersonTimeText>{profile?.available?.lunch}</PersonTimeText>
+                </PersonTime>
+                <PersonCareer>
+                  <PersonCareerTitle>약력</PersonCareerTitle>
+                  {profile?.introduce?.map((career) => {
+                    return (
+                      <PersonCareerText key={career}>{career}</PersonCareerText>
+                    );
+                  })}
+                </PersonCareer>
+              </>
+            ) : null}
           </PersonInfo>
           <ReservationInfo>
             <ReservationTitle>예약하기</ReservationTitle>
@@ -484,7 +529,10 @@ function Reserve() {
               </ReservationTimeContext>
             </ReservationTime>
             <ReservationContent>
-              <ReservationButton active={reservation}>
+              <ReservationButton
+                active={reservation}
+                onClick={requestReservation}
+              >
                 예약 신청
               </ReservationButton>
               <ReservationContentTitle>
