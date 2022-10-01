@@ -5,7 +5,12 @@ import Child from "../assets/child.jpeg";
 import Time from "../assets/time.svg";
 import Calendar from "../assets/calendar.svg";
 import flower from "../assets/flower.svg";
+import Chat from "../assets/chats.svg";
 import { useState } from "react";
+import { useQuery } from "react-query";
+import { getUserReservation } from "../api/api";
+import { useEffect } from "react";
+import moment from "moment";
 // import Text from "../assets/text.svg";
 
 const Main = styled.main`
@@ -28,7 +33,8 @@ const Wrapper = styled.div`
   border-radius: 2rem;
   padding: 2rem;
   @media ${({ theme }) => theme.size.small} {
-    width: 100vw;
+    width: 90vw;
+    padding: 1rem;
   }
 `;
 const Section = styled.div`
@@ -67,6 +73,7 @@ const Reservation = styled.div`
   @media ${({ theme }) => theme.size.small} {
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 3rem;
   }
 `;
 const ReservationImg = styled.img`
@@ -214,17 +221,20 @@ const Intro = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 const Title = styled.h1`
   font-size: 3.2rem;
   font-weight: 600;
   text-align: center;
+  margin-bottom: 3rem;
 `;
 const Contents = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100rem;
+  width: 100%;
+  height: 107rem;
 `;
 const Img = styled.img`
   width: 15rem;
@@ -232,71 +242,118 @@ const Img = styled.img`
   margin-bottom: 5rem;
   opacity: 0.4;
 `;
-const Content = styled.div``;
-const SocialImg = styled.div``;
-const SocialName = styled.div``;
-
-const Date = styled.div``;
-// const Time = styled.div``;
-const dummyData = [
-  {
-    id: 1,
-    name: "민영맘",
-    date: "09월 12일",
-    time: "오후 10시 ~ 11시",
-  },
-  {
-    id: 2,
-    name: "민영맘",
-    date: "09월 12일",
-    time: "오후 10시 ~ 11시",
-  },
-  {
-    id: 3,
-    name: "민영맘",
-    date: "09월 12일",
-    time: "오후 10시 ~ 11시",
-  },
-  {
-    id: 4,
-    name: "민영맘",
-    date: "09월 12일",
-    time: "오후 10시 ~ 11시",
-  },
-  {
-    id: 5,
-    name: "민영맘",
-    date: "09월 12일",
-    time: "오후 10시 ~ 11시",
-  },
-  {
-    id: 6,
-    name: "민영맘",
-    date: "09월 12일",
-    time: "오후 10시 ~ 11시",
-  },
-  {
-    id: 77,
-    name: "민영맘",
-    date: "09월 12일",
-    time: "오후 10시 ~ 11시",
-  },
-  {
-    id: 8,
-    name: "민영맘",
-    date: "09월 12일",
-    time: "오후 10시 ~ 11시",
-  },
-  {
-    id: 9,
-    name: "민영맘",
-    date: "09월 12일",
-    time: "오후 10시 ~ 11시",
-  },
-];
+const Consulting = styled.div`
+  width: 60rem;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2rem;
+  padding: 3rem;
+`;
+const ConsultingDoctor = styled.div`
+  display: flex;
+  width: 100%;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid black;
+`;
+const ConsultingDoctorImg = styled.img`
+  width: 17rem;
+  height: 17rem;
+  margin-right: 5rem;
+`;
+const ConsultingDoctorName = styled.div`
+  width: fit-content;
+  font-size: 2.2rem;
+  font-weight: 500;
+  padding: 1rem;
+  p {
+    margin-bottom: 1.5rem;
+    &:nth-child(2n) {
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 3rem;
+    }
+  }
+`;
+const ConsultingDate = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+`;
+const ConsultingDateImg = styled.img`
+  width: 3rem;
+  height: 3rem;
+  margin-right: 1rem;
+`;
+const ConsultingDateTitle = styled.p`
+  font-size: 2.2rem;
+  font-weight: 500;
+`;
+const ConsultingDateText = styled.p`
+  font-size: 2rem;
+  margin-bottom: 3rem;
+`;
+const ConsultingTime = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+`;
+const ConsultingTimeImg = styled.img`
+  width: 3rem;
+  height: 3rem;
+  margin-right: 1rem;
+`;
+const ConsultingTimeTitle = styled.p`
+  font-size: 2.2rem;
+  font-weight: 500;
+`;
+const ConsultingTimeText = styled.p`
+  font-size: 2rem;
+  margin-bottom: 4rem;
+`;
+const ConsultingContents = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+`;
+const ConsultingContentsImg = styled.img`
+  width: 3rem;
+  height: 3rem;
+  margin-right: 1rem;
+`;
+const ConsultingContentsTitle = styled.p`
+  font-size: 2.2rem;
+  font-weight: 500;
+`;
+const ConsultingContentsTexts = styled.div`
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  height: 55rem;
+`;
+const ConsultingContentsText = styled.p`
+  font-size: 2rem;
+`;
 
 function CheckReservation() {
-  const [info, setInfo] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [info, setInfo] = useState({});
+  const { isLoading, data } = useQuery("userReservationInfo", () =>
+    getUserReservation(JSON.parse(localStorage.getItem("user")).userId)
+  );
+
+  const showDetailInfo = (event) => {
+    if (!info.counselor) {
+      setToggle(!toggle);
+    }
+    setInfo(data.data.reservations[event.target.id]);
+  };
+
+  const confirmReservation = () => {
+
+  }
+
   return (
     <>
       <Header />
@@ -304,32 +361,77 @@ function CheckReservation() {
         <Wrapper>
           <Section>
             <Intro>
-              <Title>상담 정보</Title>
-              <Contents>{info ? null : <Img src={flower} />}</Contents>
+              <Title>상담 상세 정보</Title>
+              <Contents>
+                {toggle ? (
+                  <Consulting>
+                    <ConsultingDoctor>
+                      <ConsultingDoctorImg
+                        src={info?.counselor?.info?.thumbnail}
+                      />
+                      <ConsultingDoctorName>
+                        <p>상담사</p>
+                        <p>{info?.counselor?.info?.user_subname}</p>
+                        <p>이메일</p>
+                        <p>{info?.counselor?.info?.user_name}</p>
+                      </ConsultingDoctorName>
+                    </ConsultingDoctor>
+                    <ConsultingDate>
+                      <ConsultingDateImg src={Calendar} />
+                      <ConsultingDateTitle>상담 날짜</ConsultingDateTitle>
+                    </ConsultingDate>
+                    <ConsultingDateText>{info?.detail?.day}</ConsultingDateText>
+                    <ConsultingTime>
+                      <ConsultingTimeImg src={Time} />
+                      <ConsultingTimeTitle>상담 시간</ConsultingTimeTitle>
+                    </ConsultingTime>
+                    <ConsultingTimeText>
+                      {info?.detail?.begin} ~ {info?.detail?.end}
+                    </ConsultingTimeText>
+                    <ConsultingContents>
+                      <ConsultingContentsImg src={Chat} />
+                      <ConsultingContentsTitle>
+                        상담 내용
+                      </ConsultingContentsTitle>
+                    </ConsultingContents>
+                    <ConsultingContentsTexts>
+                      {info?.detail?.content.map((text) => (
+                        <ConsultingContentsText>{text}</ConsultingContentsText>
+                      ))}
+                    </ConsultingContentsTexts>
+                  </Consulting>
+                ) : (
+                  <Img src={flower} />
+                )}
+              </Contents>
             </Intro>
           </Section>
           <Section>
-            {dummyData.map((data) => {
+            {data?.data?.reservations?.map((reservationInfo, index) => {
               return (
-                <Reservation key={data.id}>
-                  <ReservationImg src={Child} />
+                <Reservation key={reservationInfo?.counselor?.info?.id}>
+                  <ReservationImg
+                    src={reservationInfo?.counselor?.info?.thumbnail}
+                  />
                   <ReservationContents>
-                    <ReservationName>{data.name}</ReservationName>
+                    <ReservationName>
+                      {reservationInfo?.counselor?.info?.user_subname}
+                    </ReservationName>
                     <ReservationDate>
                       <ReservationDateImg src={Calendar} />
-                      {data.date}
+                      {reservationInfo?.detail?.day}
                     </ReservationDate>
                     <ReservationTime>
                       <ReservationTimeImg src={Time} />
-                      {data.time}
+                      {`${reservationInfo?.detail?.begin} ~ ${reservationInfo?.detail?.end}`}
                     </ReservationTime>
                   </ReservationContents>
                   <ReservationBtns>
                     <ReservationResultBtns>
-                      <ReservationSucessBtn>수락</ReservationSucessBtn>
+                      <ReservationSucessBtn>확정</ReservationSucessBtn>
                       <ReservationCancelBtn>취소</ReservationCancelBtn>
                     </ReservationResultBtns>
-                    <ReservationDetailBtn onClick={() => setInfo(!info)}>
+                    <ReservationDetailBtn id={index} onClick={showDetailInfo}>
                       상세 정보 보기
                     </ReservationDetailBtn>
                   </ReservationBtns>
