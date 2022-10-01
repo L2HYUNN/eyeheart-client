@@ -5,6 +5,10 @@ import Office from "../assets/office.jpeg";
 import PersonImg from "../assets/person.jpeg";
 import { Marker, NaverMap, RenderAfterNavermapsLoaded } from "react-naver-maps";
 import { Link, useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { getConsultingsDetail } from "../api/api";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const NAVER_API_KEY = process.env.REACT_APP_NAVER_CLIENT_ID;
 
@@ -244,84 +248,95 @@ const ClinicMap = styled.div`
   }
 `;
 
-const dummyCareer = [
-  "서울 신학대 상담대학원 상담학 석사 졸업",
-  "미네소타 대학원 신학 박사 졸업",
-  "한국심리상담센터 대표",
-  "한국기업상담학회 이사",
-  "한국기업심리상담센터 원장",
-  "한국우울증연구소 소장",
-  "한국분노연구소 소장",
-  "현대자동차, 기아자동차 본사 상담사",
-];
-
 function Doctor() {
   const { id } = useParams();
+  const [clinic, setClinic] = useState({});
+  const [profile, setProfile] = useState({});
+  const { isLoading, data } = useQuery("consultingsDetail", () =>
+    getConsultingsDetail(id)
+  );
+
+  useEffect(() => {
+    if (!isLoading) {
+      setClinic({ ...data.data.main });
+      setProfile({ ...data.data.profile });
+    }
+  }, [isLoading, data]);
+
   return (
     <>
       <Header />
       <Main>
         <Wrapper>
-          <PersonInfo>
-            <Person src={PersonImg} />
-            <PersonTitle>고재천 상담사</PersonTitle>
-            <PersonText>코코의원</PersonText>
-            <PersonTime>
-              <PersonTimeTitle>상담시간</PersonTimeTitle>
-              <PersonTimeText>00:00 ~ 23:40 (일)</PersonTimeText>
-            </PersonTime>
-            <PersonTime>
-              <PersonTimeTitle>점심시간</PersonTimeTitle>
-              <PersonTimeText>없음</PersonTimeText>
-            </PersonTime>
-            <PersonCareer>
-              <PersonCareerTitle>약력</PersonCareerTitle>
-              {dummyCareer.map((career) => {
-                return (
-                  <PersonCareerText key={career}>{career}</PersonCareerText>
-                );
-              })}
-            </PersonCareer>
-          </PersonInfo>
-          <ClinicInfo>
-            <Promotion src={Office} />
-            <ClinicIntro>
-              <ClinicTexts>
-                <ClinicTitle>상담 센터 소개</ClinicTitle>
-                <ClinicText>국내 최초 기업 상담실과 연결된 상담센터</ClinicText>
-                <ClinicText>전국 상담실 네트워크 형성</ClinicText>
-                <ClinicText>최고의 전문성을 가진 센터</ClinicText>
-                <ClinicText>다양한 프로그램을 운영하는 종합상담센터</ClinicText>
-                <ClinicText>
-                  개인과 가족 그리고 사회가 행복하고 밝아지도록 노력하는 센터
-                </ClinicText>
-                <ClinicCenterTitle>상담 센터 위치</ClinicCenterTitle>
-                <ClinicCenterText>
-                  서울특별시 강남구 역삼동 717 한국은행 빌딩 7층 103호
-                </ClinicCenterText>
-                <ClinicCenterText>테헤란로 202 (우) 06220</ClinicCenterText>
-                <ClinicCenterButton>
-                  <Link to={`/consulting/${id}/reserve`}>상담 예약하기</Link>
-                </ClinicCenterButton>
-              </ClinicTexts>
-              <ClinicMap>
-                <RenderAfterNavermapsLoaded clientId={NAVER_API_KEY}>
-                  <NaverMap
-                    mapDivId="map"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                    }}
-                    defaultCenter={{ lat: 37.49988, lng: 127.03856 }}
-                    defaultZoom={16}
-                    zoomControl={true}
-                  >
-                    <Marker position={{ lat: 37.49988, lng: 127.03856 }} />
-                  </NaverMap>
-                </RenderAfterNavermapsLoaded>
-              </ClinicMap>
-            </ClinicIntro>
-          </ClinicInfo>
+          {!isLoading ? (
+            <>
+              <PersonInfo>
+                <Person src={profile?.thumbnail} />
+                <PersonTitle>{profile?.name} 상담사</PersonTitle>
+                <PersonText>{profile?.breif}</PersonText>
+                <PersonTime>
+                  <PersonTimeTitle>상담시간</PersonTimeTitle>
+                  <PersonTimeText>
+                    {profile?.available?.open} ~ {profile?.available?.close} (?)
+                  </PersonTimeText>
+                </PersonTime>
+                <PersonTime>
+                  <PersonTimeTitle>점심시간</PersonTimeTitle>
+                  <PersonTimeText>{profile?.available?.lunch}</PersonTimeText>
+                </PersonTime>
+                <PersonCareer>
+                  <PersonCareerTitle>약력</PersonCareerTitle>
+                  {profile?.introduce?.map((career) => {
+                    return (
+                      <PersonCareerText key={career}>{career}</PersonCareerText>
+                    );
+                  })}
+                </PersonCareer>
+              </PersonInfo>
+              <ClinicInfo>
+                <Promotion src={clinic?.image} />
+                <ClinicIntro>
+                  <ClinicTexts>
+                    <ClinicTitle>상담 센터 소개</ClinicTitle>
+                    {clinic?.desc?.map((text) => {
+                      return <ClinicText key={text}>{text}</ClinicText>;
+                    })}
+                    <ClinicCenterTitle>상담 센터 위치</ClinicCenterTitle>
+                    <ClinicCenterText>{clinic?.address}</ClinicCenterText>
+                    <ClinicCenterText>{clinic?.post_address}</ClinicCenterText>
+
+                    <Link to={`/consulting/${id}/reserve`}>
+                      <ClinicCenterButton>상담 예약하기</ClinicCenterButton>
+                    </Link>
+                  </ClinicTexts>
+                  <ClinicMap>
+                    <RenderAfterNavermapsLoaded clientId={NAVER_API_KEY}>
+                      <NaverMap
+                        mapDivId="map"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                        }}
+                        defaultCenter={{
+                          lat: +clinic?.location?.lat,
+                          lng: +clinic?.location?.long,
+                        }}
+                        defaultZoom={16}
+                        zoomControl={true}
+                      >
+                        <Marker
+                          position={{
+                            lat: +clinic?.location?.lat,
+                            lng: +clinic?.location?.long,
+                          }}
+                        />
+                      </NaverMap>
+                    </RenderAfterNavermapsLoaded>
+                  </ClinicMap>
+                </ClinicIntro>
+              </ClinicInfo>
+            </>
+          ) : null}
         </Wrapper>
       </Main>
       <Footer />
