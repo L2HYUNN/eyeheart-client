@@ -72,6 +72,8 @@ export const socket = io.connect("http://125.6.39.158:5000/realchat", {
   transports: ["websocket"],
 });
 
+socket.emit("join", { serial_number: "abcd1234", type: "SUPERVISOR" });
+
 function App() {
   useEffect(() => {
     return () => {
