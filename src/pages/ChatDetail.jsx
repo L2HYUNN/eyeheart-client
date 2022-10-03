@@ -8,6 +8,8 @@ import { useState } from "react";
 import moment from "moment";
 import { socket } from "../App";
 import { useEffect } from "react";
+import { useQuery } from "react-query";
+import { getChat } from "../api/api";
 
 const Main = styled.main`
   display: flex;
@@ -353,6 +355,9 @@ function ChatDetail() {
   const [date, setDate] = useState(new Date());
   const [chat, setChat] = useState([]);
   const [message, setMessage] = useState("");
+  const { isLoading, data } = useQuery("chatList", () =>
+    getChat(moment(date).format("YYMMDD"))
+  );
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -368,8 +373,8 @@ function ChatDetail() {
   }, [message]);
 
   useEffect(() => {
-    console.log(chat);
-  }, [chat]);
+    if (!isLoading) console.log(data);
+  }, [data, isLoading]);
 
   const sendText = (event) => {
     event.preventDefault();
