@@ -8,6 +8,7 @@ import { useState } from "react";
 import moment from "moment";
 import { socket } from "../App";
 import { useEffect } from "react";
+import { useRef } from "react";
 import { useQuery } from "react-query";
 import { getChat } from "../api/api";
 
@@ -113,9 +114,9 @@ const Chatlog = styled.ul`
   /* justify-content: space-between; */
   overflow-y: scroll;
   height: 90rem;
-  &::-webkit-scrollbar {
+  /* &::-webkit-scrollbar {
     display: none;
-  }
+  } */
   -ms-overflow-style: none;
   scrollbar-width: none;
   @media ${({ theme }) => theme.size.small} {
@@ -355,31 +356,37 @@ function ChatDetail() {
   const [date, setDate] = useState(new Date());
   const [chat, setChat] = useState([]);
   const [message, setMessage] = useState("");
+  const scrollRef = useRef(null);
+
+  const scrollToBottom = () => {
+    console.log(scrollRef.current);
+  };
   const { isLoading, data } = useQuery("chatList", () =>
     getChat(moment(date).format("YYMMDD"))
   );
 
   const sendMessage = (e) => {
     e.preventDefault();
-    socket.emit("SEND_MESSAGE", { message });
+
+    const now = moment();
+    const day = now.format("YYYYMMDD");
+    const time = now.format("HHmmss");
+
+    socket.emit("SEND_MESSAGE", { type: "SUPERVISOR", message });
+
+    setChat((prev) => [...prev, { role: "doll", message, day, time }]);
     setMessage("");
   };
 
   useEffect(() => {
-    socket.on("RECEIVE_MESSAGE", ({ response, day, time }) => {
-      console.log(response, day, time);
-      // setChat([...chat, message]);
+    socket.on("RECEIVE_MESSAGE", ({ response: message, day, time }) => {
+      setChat((prev) => [...prev, { role: "child", message, day, time }]);
     });
-  }, [message]);
+  }, [setChat]);
 
   useEffect(() => {
     if (!isLoading) console.log(data);
   }, [data, isLoading]);
-
-  const sendText = (event) => {
-    event.preventDefault();
-    return setMessage(event.target.value);
-  };
 
   return (
     <>
@@ -395,7 +402,7 @@ function ChatDetail() {
               <Dates>{moment(date).format("YYYY년 MM월 DD일")}</Dates>
             </DateBox>
             <ChatBox>
-              <Chatlog>
+              <Chatlog ref={scrollRef}>
                 {DummyChat.map((user) => {
                   if (user.role === "child") {
                     return (
@@ -421,11 +428,40 @@ function ChatDetail() {
                     );
                   }
                 })}
+                {chat.map((info) => {
+                  if (info.role === "child") {
+                    return (
+                      <ChildContents key={info.time}>
+                        <ChildImg src={child}></ChildImg>
+                        <ChildInfo>
+                          <ChildName>{info.name || "민영이"}</ChildName>
+                          <ChildChats>
+                            <ChildChat>{info.message}</ChildChat>
+                            <ChildChatTime>{info.time}</ChildChatTime>
+                          </ChildChats>
+                        </ChildInfo>
+                      </ChildContents>
+                    );
+                  } else {
+                    return (
+                      <UserContents key={info.time}>
+                        <UserChats>
+                          <UserChatTime>{info.time}</UserChatTime>
+                          <UserChat>{info.message}</UserChat>
+                        </UserChats>
+                      </UserContents>
+                    );
+                  }
+                })}
               </Chatlog>
             </ChatBox>
           </Contents>
           <ChatForm>
-            <ChatInput onChange={sendText} type="text" />
+            <ChatInput
+              onChange={(e) => setMessage(e.target.value)}
+              type="text"
+              value={message}
+            />
             <ChatButton onClick={sendMessage}>전송</ChatButton>
           </ChatForm>
         </Container>
