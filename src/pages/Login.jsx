@@ -6,7 +6,7 @@ import flower from "../assets/flower.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { postUserLogin } from "../api";
+import { postUserLogin } from "../api/api";
 import { useEffect } from "react";
 
 const Main = styled.main`
@@ -14,27 +14,49 @@ const Main = styled.main`
   justify-content: center;
   min-width: 144rem;
   padding: 15rem 0;
+  @media ${({ theme }) => theme.size.small} {
+    min-width: max-content;
+    width: 100%;
+    padding-left: 0rem;
+    padding-top: 7rem;
+  }
 `;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 144rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 100%;
+    padding: 0 2rem;
+  }
 `;
 const LoginImg = styled.img`
   width: 15rem;
   height: 15rem;
   margin-bottom: 5rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 8rem;
+    height: 8rem;
+  }
 `;
 const LoginTitle = styled.h1`
   font-size: 2.2rem;
   font-weight: 500;
   margin-bottom: 10rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.8rem;
+  }
 `;
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   margin-bottom: 5rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 100%;
+    align-items: center;
+    max-width: 48rem;
+  }
 `;
 const LoginInput = styled.input`
   width: 45rem;
@@ -47,6 +69,11 @@ const LoginInput = styled.input`
   &:focus {
     outline: none;
   }
+  @media ${({ theme }) => theme.size.small} {
+    width: 80%;
+    max-width: 48rem;
+    font-size: 1.4rem;
+  }
 `;
 const LoginButton = styled.button`
   height: 5rem;
@@ -57,10 +84,18 @@ const LoginButton = styled.button`
   font-weight: 600;
   background-color: ${({ theme }) => theme.colors.darkPink};
   cursor: pointer;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+    height: 4rem;
+    padding: 0 3rem;
+  }
 `;
 const LoginJoinText = styled.div`
   font-size: 1.6rem;
   opacity: 0.6;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.4rem;
+  }
 `;
 
 function Login() {
