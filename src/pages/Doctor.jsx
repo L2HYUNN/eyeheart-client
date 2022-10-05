@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import Office from "../assets/office.jpeg";
-import PersonImg from "../assets/person.jpeg";
 import { Marker, NaverMap, RenderAfterNavermapsLoaded } from "react-naver-maps";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
@@ -277,7 +275,7 @@ function Doctor() {
                 <PersonTime>
                   <PersonTimeTitle>상담시간</PersonTimeTitle>
                   <PersonTimeText>
-                    {profile?.available?.open} ~ {profile?.available?.close} (?)
+                    {profile?.available?.open} ~ {profile?.available?.close}
                   </PersonTimeText>
                 </PersonTime>
                 <PersonTime>

@@ -2,17 +2,23 @@ import styled from "styled-components";
 // Components
 import Header from "../components/Header";
 import Info from "../components/Info";
-import Chat from "../components/Chat";
 import Status from "../components/Status";
 import Weather from "../components/Weather";
+import Promotion from "../components/Promotion";
 import Footer from "../components/Footer";
-import Report from "../components/Report";
+import Relation from "../components/Relation";
 
 const Main = styled.main`
   display: flex;
   justify-content: center;
   min-width: 144rem;
   padding-top: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    min-width: max-content;
+    width: 100%;
+    padding-left: 0rem;
+    padding-top: 3rem;
+  }
 `;
 const Container = styled.div`
   display: grid;
@@ -21,11 +27,15 @@ const Container = styled.div`
   max-width: 144rem;
   justify-items: center;
   grid-template:
-    "info info chat" 30rem
-    "status status chat" 25rem
-    "weather weather chat" 25rem
-    "weather weather chat" 25rem
-    "report report report" 70rem / 36rem 36rem 72rem;
+    "info info relation" 30rem
+    "status status relation" 25rem
+    "weather weather relation" 25rem
+    "weather weather relation" 25rem
+    "promotion promotion relation" 40rem / 36rem 36rem 72rem;
+  @media ${({ theme }) => theme.size.small} {
+    display: block;
+    width: 100%;
+  }
 `;
 
 function Analysis() {
@@ -35,10 +45,10 @@ function Analysis() {
       <Main>
         <Container>
           <Info />
-          <Chat />
           <Status />
           <Weather />
-          <Report />
+          <Relation />
+          <Promotion />
         </Container>
       </Main>
       <Footer />

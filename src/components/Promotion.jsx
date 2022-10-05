@@ -1,16 +1,16 @@
-import moment from "moment";
-import { useQuery } from "react-query";
 import styled from "styled-components";
-import { getAnalysisWord } from "../api/api";
+import flower from "../assets/flower.svg";
+import balloon from "../assets/balloon.jpeg";
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 72rem;
-  height: 25rem;
-  grid-area: status;
+  height: 40rem;
+  grid-area: promotion;
   @media ${({ theme }) => theme.size.small} {
+    display: none;
     min-width: max-content;
     width: 100vw;
     padding-left: 0rem;
@@ -18,14 +18,20 @@ const Container = styled.div`
     height: 100%;
   }
 `;
+const BackgroundImage = styled.img`
+  width: 33rem;
+  height: 33rem;
+  border-radius: 3rem;
+  margin-left: 2rem;
+  margin-top: 2rem;
+`;
 const Contents = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 67rem;
-  height: 20rem;
-  background-color: #ffe2d8;
+  width: 33rem;
+  height: 33rem;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   border-radius: 2rem;
@@ -34,6 +40,7 @@ const Contents = styled.div`
     width: 90%;
     height: 12rem;
   }
+  margin-top: 2rem;
 `;
 const Text = styled.span`
   color: black;
@@ -46,24 +53,40 @@ const Text = styled.span`
     font-weight: 500;
   }
 `;
-
-const date = moment(new Date()).format("YYYYMMDD");
+const Title = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media ${({ theme }) => theme.size.small} {
+    width: max-content;
+  }
+`;
+const TitleImg = styled.img`
+  width: 4.3rem;
+  height: 4.3rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 3rem;
+    height: 3rem;
+  }
+`;
+const TitleName = styled.h1`
+  font-family: "Gamja Flower", cursive;
+  font-size: 4.5rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 3rem;
+  }
+`;
 
 function Status() {
-  const { isLoading, data } = useQuery("analysisWord", () =>
-    getAnalysisWord(date)
-  );
   return (
     <Container>
       <Contents>
-        {!isLoading ? (
-          data?.data.message.map((msg, index) => {
-            return <Text key={index}>{msg}</Text>;
-          })
-        ) : (
-          <Text>마음 정보를 확인할 수 없습니다.</Text>
-        )}
+        <Title>
+          <TitleImg src={flower} />
+          <TitleName>아이마음</TitleName>
+        </Title>
       </Contents>
+      <BackgroundImage src={balloon} />
     </Container>
   );
 }

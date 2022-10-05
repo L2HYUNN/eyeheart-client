@@ -1,4 +1,7 @@
+import moment from "moment";
+import { useQuery } from "react-query";
 import styled from "styled-components";
+import { getAnalysisEmotion, getAnalysisHeart } from "../api/api";
 import child from "../assets/child.jpeg";
 
 const Container = styled.div`
@@ -8,6 +11,14 @@ const Container = styled.div`
   width: 72rem;
   height: 30rem;
   grid-area: info;
+  @media ${({ theme }) => theme.size.small} {
+    align-items: flex-start;
+    min-width: max-content;
+    width: 100vw;
+    padding-left: 0rem;
+    /* padding-top: 2rem; */
+    height: 100%;
+  }
 `;
 const Contents = styled.div`
   display: flex;
@@ -19,21 +30,33 @@ const Contents = styled.div`
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   border-radius: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    flex-direction: column;
+    width: 90%;
+    height: 100%;
+  }
 `;
 const ContentInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 5rem;
+  @media ${({ theme }) => theme.size.small} {
+    padding: 2rem;
+  }
 `;
 const Img = styled.img`
   width: 12rem;
   height: 12rem;
   border-radius: 50%;
   margin-bottom: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 10rem;
+    height: 10rem;
+  }
 `;
 const Name = styled.div`
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 600;
 `;
 const ContentText = styled.div`
@@ -43,12 +66,22 @@ const ContentText = styled.div`
   width: 100%;
   height: 100%;
   padding: 2.5rem;
+  @media ${({ theme }) => theme.size.small} {
+    padding-top: 1rem;
+  }
 `;
-const Chart = styled.div``;
+const Chart = styled.div`
+  @media ${({ theme }) => theme.size.small} {
+    margin-bottom: 1.5rem;
+  }
+`;
 const ChartName = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.main};
+  font-size: 1.6rem;
   font-weight: 500;
   margin-right: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 const ChartContents = styled.div`
   display: flex;
@@ -56,18 +89,28 @@ const ChartContents = styled.div`
   margin-top: 1rem;
 `;
 const ChartGraph = styled.div`
-  width: 30rem;
+  width: ${(props) => `${props.number}%`};
   height: 3rem;
   background-color: ${({ theme }) => theme.colors.pink};
   /* box-shadow: ${({ theme }) => theme.colors.pink} 0px 6px 24px 0px,
     ${({ theme }) => theme.colors.pink} 0px 0px 0px 1px; */
   margin-right: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: ${(props) => `${props.number}%`};
+  }
 `;
 const ChartNumber = styled.div``;
-const Heart = styled.div``;
+const Heart = styled.div`
+  @media ${({ theme }) => theme.size.small} {
+    margin-bottom: 1.5rem;
+  }
+`;
 const HeartName = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.main};
+  font-size: 1.6rem;
   font-weight: 500;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 const HeartContents = styled.div`
   display: flex;
@@ -87,11 +130,21 @@ const HeartInfo = styled.div`
   font-family: "Gamja Flower", cursive;
   /* box-shadow: ${(props) => props.color} 0px 6px 24px 0px,
     ${(props) => props.color} 0px 0px 0px 1px; */
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.4rem;
+  }
 `;
-const Interest = styled.div``;
+const Interest = styled.div`
+  @media ${({ theme }) => theme.size.small} {
+    margin-bottom: 1.5rem;
+  }
+`;
 const InterestName = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.main};
+  font-size: 1.6rem;
   font-weight: 500;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 const InterestContents = styled.div`
   display: flex;
@@ -102,21 +155,12 @@ const InterestItem = styled.div`
   font-weight: 600;
 `;
 
+const date = moment().format("YYYYMMDD");
+
 function Info() {
-  const DumuyHeart = [
-    {
-      name: "기쁨",
-      color: "#ffe1d8",
-    },
-    {
-      name: "행복",
-      color: "#fff5d8",
-    },
-    {
-      name: "고민",
-      color: "#d8e2ff",
-    },
-  ];
+  const heart = useQuery("analysisHeart", () => getAnalysisHeart(date));
+  const emotion = useQuery("analysisEmotion", () => getAnalysisEmotion(date));
+
   return (
     <Container>
       <Contents>
@@ -128,17 +172,21 @@ function Info() {
           <Chart>
             <ChartName>마음지수</ChartName>
             <ChartContents>
-              <ChartGraph></ChartGraph>
-              <ChartNumber>95</ChartNumber>
+              <ChartGraph
+                number={heart?.data?.data?.summary?.emotion?.emotion_score}
+              ></ChartGraph>
+              <ChartNumber>
+                {Math.floor(heart?.data?.data?.summary?.emotion?.emotion_score)}
+              </ChartNumber>
             </ChartContents>
           </Chart>
           <Heart>
             <HeartName>마음</HeartName>
             <HeartContents>
-              {DumuyHeart.map((heart) => {
+              {emotion?.data?.data?.message.map((heart) => {
                 return (
-                  <HeartInfo key={heart.name} color={heart.color}>
-                    {heart.name}
+                  <HeartInfo key={heart?.name} color={heart?.color}>
+                    {heart?.name}
                   </HeartInfo>
                 );
               })}

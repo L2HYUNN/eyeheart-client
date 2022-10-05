@@ -1,6 +1,5 @@
 import Router from "./router/Router";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-import { ReactQueryDevtools } from "react-query/devtools";
 import HelmetComponent from "./components/Helmet";
 import io from "socket.io-client";
 import { useEffect } from "react";
@@ -86,7 +85,6 @@ function App() {
         <HelmetComponent />
         <GlobalStyle />
         <Router />
-        <ReactQueryDevtools initialIsOpen={false} />
       </ThemeProvider>
     </>
   );
