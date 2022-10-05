@@ -33,13 +33,17 @@ const Wrapper = styled.div`
   border-radius: 2rem;
   padding: 2rem;
   @media ${({ theme }) => theme.size.small} {
+    flex-direction: column-reverse;
     width: 90vw;
+    min-height: 50rem;
+    height: 100%;
     padding: 1rem;
   }
 `;
 const Section = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 70rem;
   height: 116rem;
   padding: 1rem;
@@ -53,17 +57,23 @@ const Section = styled.div`
     margin-right: 2rem;
     border-right: 1px solid rgba(0, 0, 0, 0.2);
     @media ${({ theme }) => theme.size.small} {
-      display: none;
+      display: ${(props) => (props.toggle ? "flex" : "none")};
+      width: 100%;
+      height: 100%;
+      margin-right: 0;
+      border-right: none;
     }
   }
   @media ${({ theme }) => theme.size.small} {
-    width: 100vw;
+    width: 100%;
+    height: 100%;
   }
 `;
 const Reservation = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  width: 66rem;
+  width: 65rem;
   height: 15rem;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
@@ -222,12 +232,19 @@ const Intro = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  @media ${({ theme }) => theme.size.small} {
+    padding-top: 3rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+  }
 `;
 const Title = styled.h1`
   font-size: 3.2rem;
   font-weight: 600;
   text-align: center;
   margin-bottom: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 2rem;
+  }
 `;
 const Contents = styled.div`
   display: flex;
@@ -235,6 +252,9 @@ const Contents = styled.div`
   align-items: center;
   width: 100%;
   height: 107rem;
+  @media ${({ theme }) => theme.size.small} {
+    height: 100%;
+  }
 `;
 const Img = styled.img`
   width: 15rem;
@@ -248,17 +268,30 @@ const Consulting = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 2rem;
   padding: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    border: none;
+  }
 `;
 const ConsultingDoctor = styled.div`
   display: flex;
   width: 100%;
   margin-bottom: 3rem;
   border-bottom: 1px solid black;
+  @media ${({ theme }) => theme.size.small} {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 const ConsultingDoctorImg = styled.img`
   width: 17rem;
   height: 17rem;
   margin-right: 5rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 15rem;
+    height: 15rem;
+    margin-right: 0;
+  }
 `;
 const ConsultingDoctorName = styled.div`
   width: fit-content;
@@ -271,7 +304,14 @@ const ConsultingDoctorName = styled.div`
       font-size: 2rem;
       font-weight: 400;
       margin-bottom: 3rem;
+      @media ${({ theme }) => theme.size.small} {
+        font-size: 1.6rem;
+      }
     }
+  }
+  @media ${({ theme }) => theme.size.small} {
+    text-align: center;
+    font-size: 1.8rem;
   }
 `;
 const ConsultingDate = styled.div`
@@ -284,14 +324,24 @@ const ConsultingDateImg = styled.img`
   width: 3rem;
   height: 3rem;
   margin-right: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 `;
 const ConsultingDateTitle = styled.p`
   font-size: 2.2rem;
   font-weight: 500;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.8rem;
+  }
 `;
 const ConsultingDateText = styled.p`
   font-size: 2rem;
   margin-bottom: 3rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 const ConsultingTime = styled.div`
   display: flex;
@@ -303,14 +353,24 @@ const ConsultingTimeImg = styled.img`
   width: 3rem;
   height: 3rem;
   margin-right: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 `;
 const ConsultingTimeTitle = styled.p`
   font-size: 2.2rem;
   font-weight: 500;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.8rem;
+  }
 `;
 const ConsultingTimeText = styled.p`
   font-size: 2rem;
   margin-bottom: 4rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 const ConsultingContents = styled.div`
   display: flex;
@@ -322,18 +382,32 @@ const ConsultingContentsImg = styled.img`
   width: 3rem;
   height: 3rem;
   margin-right: 1rem;
+  @media ${({ theme }) => theme.size.small} {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 `;
 const ConsultingContentsTitle = styled.p`
   font-size: 2.2rem;
   font-weight: 500;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.8rem;
+  }
 `;
 const ConsultingContentsTexts = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 1rem;
   height: 55rem;
+  @media ${({ theme }) => theme.size.small} {
+    min-height: 20rem;
+    height: 100%;
+  }
 `;
 const ConsultingContentsText = styled.p`
   font-size: 2rem;
+  @media ${({ theme }) => theme.size.small} {
+    font-size: 1.6rem;
+  }
 `;
 
 function CheckReservation() {
@@ -350,16 +424,14 @@ function CheckReservation() {
     setInfo(data.data.reservations[event.target.id]);
   };
 
-  const confirmReservation = () => {
-
-  }
+  const confirmReservation = () => {};
 
   return (
     <>
       <Header />
       <Main>
         <Wrapper>
-          <Section>
+          <Section toggle={toggle}>
             <Intro>
               <Title>상담 상세 정보</Title>
               <Contents>
