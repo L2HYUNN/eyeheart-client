@@ -63,7 +63,7 @@ const InfoSubTitle = styled.span`
 const InfoButton = styled.button`
   width: fit-content;
   padding: 2rem 5rem;
-  margin-top: 27rem;
+  margin-top: 5rem;
   font-size: 1.8rem;
   font-weight: 600;
   color: white;
@@ -87,12 +87,13 @@ const InfoSubContents = styled.div`
   }
 `;
 const InfoImg = styled.img`
-  width: 72rem;
-  height: 36rem;
+  width: 70rem;
+  height: 60rem;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   border-radius: 2rem;
-  margin-top: 20rem;
+  margin-top: 15rem;
+  object-fit: contain;
   @media ${({ theme }) => theme.size.small} {
     display: flex;
     justify-content: center;
@@ -104,7 +105,7 @@ const InfoImg = styled.img`
 const Arrow = styled.img`
   width: 4.3rem;
   height: 4rem;
-  margin: 25rem 0;
+  margin: 15rem 0;
   opacity: 0.4;
   @media ${({ theme }) => theme.size.small} {
     margin: 5rem 0;
