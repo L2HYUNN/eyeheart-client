@@ -26,7 +26,7 @@ const Contents = styled.div`
   @media ${({ theme }) => theme.size.small} {
     width: 100%;
     max-width: 100vw;
-    padding: 3rem 1.2rem;
+    padding: 2rem 1.2rem;
     padding-right: 0.1rem;
   }
 `;
