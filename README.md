@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# 🧸 아이마음
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## 📌 Intro
 
-In the project directory, you can run:
+아이마음은 <b>AI 챗봇 기반 심리 상담 보조 도구를 이용한 상담 플랫폼</b> 입니다. <br>
+속마음을 잘 드러내지 않는 아이들에게 맞춤 인형을 제공하여 친밀감을 형성하고 대화 데이터를 수집합니다. <br>
+수집된 데이터를 기반으로 통계 및 분석 데이터를 제공하며, 상담사 중계 기능 또한 제공합니다.<br>
 
-### `npm start`
+## 💻 Developers
+<div align="center">
+    <table border="1">
+        <th><a href="https://github.com/L2HYUNN">이동현</a></th>
+        <tr>
+            <td>
+                <img src="https://github.com/L2HYUNN.png" width='80' />
+            </td>
+        </tr>
+    </table>
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🔨 Environment
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Development
 
-### `npm test`
+##### Language 
+<img src="https://img.shields.io/badge/Javascript-F7DF1E?style=flat-square&logo=Javascript&logoColor=black">
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+##### Library
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black">
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+<br/>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<img src="https://img.shields.io/badge/React&nbsp;Query-FF4154?style=flat-square&logo=ReactQuery&logoColor=black">
+<img src="https://img.shields.io/badge/Recoil-3578E5?style=flat-square&logo=Recoil&logoColor=black">
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br/>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<img src="https://img.shields.io/badge/React&nbsp;Router-CA4245?style=flat-square&logo=ReactRouter&logoColor=black">
+<img src="https://img.shields.io/badge/React&nbsp;Hook&nbsp;Form-EC5990?style=flat-square&logo=ReactHookForm&logoColor=black">
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+##### Communication
+  <img src="https://img.shields.io/badge/Collabee-bd9419?style=flat-square&logo=collabee&logoColor=white"/> <img src="https://img.shields.io/badge/GitLab-FC6D26?style=flat-square&logo=GitLab&logoColor=white"/>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<img src="https://img.shields.io/badge/Amazon&nbsp;EC2-FF9900?style=flat-square&logo=AmazonEC2&logoColor=black"/>
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## ⚙️ Project Settings
+
+#### Install npm  dependencies
+
+```bash
+> npm install
+```
+
+#### Set  `.env`
+
+```dotenv
+REACT_APP_NAVER_CLIENT_ID="NAVER_API_ID"
+```
+
+#### Start server
+
+```bash
+> npm start
+```
+
+
+## 📚 Documentations
+
+
+## 🔒 LICENSE
+
+Preparing... 
+
+
+
+
+
+
+
+
