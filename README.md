@@ -1,6 +1,6 @@
 # 🧸 아이마음
 
-<img src="./.gitlab/assets/main.png">
+<img src="./.gitlab/assets/main.png" width="400px">
 
 ## 📌 Intro
 
