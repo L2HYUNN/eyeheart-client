@@ -32,15 +32,9 @@
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black">
 
 
-<br/>
+<img src="https://img.shields.io/badge/React&nbsp;Query-FF4154?style=flat-square&logo=ReactQuery&logoColor=black"> <img src="https://img.shields.io/badge/Recoil-3578E5?style=flat-square&logo=Recoil&logoColor=black">
 
-<img src="https://img.shields.io/badge/React&nbsp;Query-FF4154?style=flat-square&logo=ReactQuery&logoColor=black">
-<img src="https://img.shields.io/badge/Recoil-3578E5?style=flat-square&logo=Recoil&logoColor=black">
-
-<br/>
-
-<img src="https://img.shields.io/badge/React&nbsp;Router-CA4245?style=flat-square&logo=ReactRouter&logoColor=black">
-<img src="https://img.shields.io/badge/React&nbsp;Hook&nbsp;Form-EC5990?style=flat-square&logo=ReactHookForm&logoColor=black">
+<img src="https://img.shields.io/badge/React&nbsp;Router-CA4245?style=flat-square&logo=ReactRouter&logoColor=black"> <img src="https://img.shields.io/badge/React&nbsp;Hook&nbsp;Form-EC5990?style=flat-square&logo=ReactHookForm&logoColor=black">
 
 
 ##### Communication
