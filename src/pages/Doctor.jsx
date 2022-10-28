@@ -1,12 +1,13 @@
+/* eslint-disable no-unsafe-optional-chaining */
+import { useEffect,useState } from "react";
+import { Marker, NaverMap, RenderAfterNavermapsLoaded } from "react-naver-maps";
+import { useQuery } from "react-query";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
+
+import { getConsultingsDetail } from "../api/api";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { Marker, NaverMap, RenderAfterNavermapsLoaded } from "react-naver-maps";
-import { Link, useParams } from "react-router-dom";
-import { useQuery } from "react-query";
-import { getConsultingsDetail } from "../api/api";
-import { useEffect } from "react";
-import { useState } from "react";
 
 const NAVER_API_KEY = process.env.REACT_APP_NAVER_CLIENT_ID;
 
@@ -284,11 +285,9 @@ function Doctor() {
                 </PersonTime>
                 <PersonCareer>
                   <PersonCareerTitle>약력</PersonCareerTitle>
-                  {profile?.introduce?.map((career) => {
-                    return (
+                  {profile?.introduce?.map((career) => (
                       <PersonCareerText key={career}>{career}</PersonCareerText>
-                    );
-                  })}
+                    ))}
                 </PersonCareer>
               </PersonInfo>
               <ClinicInfo>
@@ -296,9 +295,7 @@ function Doctor() {
                 <ClinicIntro>
                   <ClinicTexts>
                     <ClinicTitle>상담 센터 소개</ClinicTitle>
-                    {clinic?.desc?.map((text) => {
-                      return <ClinicText key={text}>{text}</ClinicText>;
-                    })}
+                    {clinic?.desc?.map((text) => <ClinicText key={text}>{text}</ClinicText>)}
                     <ClinicCenterTitle>상담 센터 위치</ClinicCenterTitle>
                     <ClinicCenterText>{clinic?.address}</ClinicCenterText>
                     <ClinicCenterText>{clinic?.post_address}</ClinicCenterText>
@@ -320,7 +317,7 @@ function Doctor() {
                           lng: +clinic?.location?.long,
                         }}
                         defaultZoom={16}
-                        zoomControl={true}
+                        zoomControl
                       >
                         <Marker
                           position={{

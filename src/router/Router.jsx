@@ -1,15 +1,17 @@
-import { BrowserRouter as Routers, Routes, Route } from "react-router-dom";
-import Analysis from "../pages/Analysis";
-import ChatDetail from "../pages/ChatDetail";
-import CheckReservation from "../pages/CheckReservation";
-import Child from "../pages/Child";
-import Consulting from "../pages/Consulting";
-import Doctor from "../pages/Doctor";
-import Home from "../pages/Home";
-import Join from "../pages/Join";
-import Login from "../pages/Login";
-import Logout from "../pages/Logout";
-import Reserve from "../pages/Reserve";
+/* eslint-disable import/no-cycle */
+import { BrowserRouter as Routers, Route, Routes } from 'react-router-dom';
+
+import Analysis from '../pages/Analysis';
+import ChatDetail from '../pages/ChatDetail';
+import CheckReservation from '../pages/CheckReservation';
+import Child from '../pages/Child';
+import Consulting from '../pages/Consulting';
+import Doctor from '../pages/Doctor';
+import Home from '../pages/Home';
+import Join from '../pages/Join';
+import Login from '../pages/Login';
+import Logout from '../pages/Logout';
+import Reserve from '../pages/Reserve';
 
 function Router() {
   return (
