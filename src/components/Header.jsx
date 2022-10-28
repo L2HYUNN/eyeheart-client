@@ -1,10 +1,11 @@
-import styled from "styled-components";
-import child from "../assets/child.jpeg";
-import notification from "../assets/notification.svg";
-import flower from "../assets/flower.svg";
-import avatar from "../assets/avatar.svg";
-import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+import avatar from '../assets/avatar.svg';
+import child from '../assets/child.jpeg';
+import flower from '../assets/flower.svg';
+import notification from '../assets/notification.svg';
 
 const Container = styled.div`
   display: flex;
@@ -46,7 +47,7 @@ const TitleImg = styled.img`
   }
 `;
 const TitleName = styled.h1`
-  font-family: "Gamja Flower", cursive;
+  font-family: 'Gamja Flower', cursive;
   font-size: 4.5rem;
   @media ${({ theme }) => theme.size.small} {
     font-size: 3rem;
@@ -91,7 +92,7 @@ const NavNotification = styled.img`
 `;
 const NavMenu = styled.ul`
   position: absolute;
-  top: ${(props) => (props.menu ? "4rem" : "0")};
+  top: ${(props) => (props.menu ? '4rem' : '0')};
   right: 0rem;
   display: flex;
   flex-direction: column;
@@ -102,9 +103,9 @@ const NavMenu = styled.ul`
   background-color: rgba(239, 239, 239, 0.8);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border-radius: 2rem;
-  opacity: ${(props) => (props.menu ? "1" : "0")};
+  opacity: ${(props) => (props.menu ? '1' : '0')};
 
-  z-index: ${(props) => (props.menu ? "999" : "-1")};
+  z-index: ${(props) => (props.menu ? '999' : '-1')};
   transition: all 0.3s linear;
 `;
 const NavMenuItem = styled.li`
@@ -114,27 +115,27 @@ const NavMenuItem = styled.li`
 function Header() {
   const [menu, setMenu] = useState(false);
   const navRef = useRef(null);
-  const loggedInUser = JSON.parse(localStorage.getItem("user"));
+  const loggedInUser = JSON.parse(localStorage.getItem('user'));
 
   let navList;
 
   if (loggedInUser?.user) {
     navList = [
-      { title: "채팅", url: "/chat" },
-      { title: "상담", url: "/consulting" },
-      { title: "분석", url: "/analysis" },
+      { title: '채팅', url: '/chat' },
+      { title: '상담', url: '/consulting' },
+      { title: '분석', url: '/analysis' },
     ];
   } else {
     navList = [
-      { title: "로그인", url: "/login" },
-      { title: "회원가입", url: "/join" },
+      { title: '로그인', url: '/login' },
+      { title: '회원가입', url: '/join' },
     ];
   }
 
   const navMenuList = [
-    { title: "로그 아웃", url: "/logout" },
-    { title: "아이 정보", url: "/child" },
-    { title: "상담 목록", url: "/reservation" },
+    { title: '로그 아웃', url: '/logout' },
+    { title: '아이 정보', url: '/child' },
+    { title: '상담 목록', url: '/reservation' },
   ];
 
   const showUserMenu = () => {
@@ -143,17 +144,14 @@ function Header() {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        navRef.current !== event.target &&
-        !navRef.current.contains(event.target)
-      ) {
+      if (navRef.current !== event.target && !navRef.current.contains(event.target)) {
         setMenu(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [navRef]);
 
@@ -162,43 +160,35 @@ function Header() {
       <Container>
         <Contents>
           <Title>
-            <Link to={"/"}>
+            <Link to="/">
               <TitleImg src={flower} />
             </Link>
-            <Link to={"/"}>
+            <Link to="/">
               <TitleName>아이마음</TitleName>
             </Link>
           </Title>
           <Nav>
             <NavList>
-              {navList.map((list) => {
-                return (
-                  <NavItem key={list.title}>
-                    <Link to={list.url}>{list.title}</Link>
-                  </NavItem>
-                );
-              })}
+              {navList.map((list) => (
+                <NavItem key={list.title}>
+                  <Link to={list.url}>{list.title}</Link>
+                </NavItem>
+              ))}
             </NavList>
             <NavList>
               <NavItem>
-                {loggedInUser?.user ? (
-                  <NavImg src={child} onClick={showUserMenu} />
-                ) : (
-                  <NavImg src={avatar} />
-                )}
+                {loggedInUser?.user ? <NavImg src={child} onClick={showUserMenu} /> : <NavImg src={avatar} />}
               </NavItem>
               <NavItem>
                 <NavNotification src={notification} />
               </NavItem>
               <NavItem>
                 <NavMenu menu={menu} ref={navRef}>
-                  {navMenuList.map((navMenu) => {
-                    return (
-                      <NavMenuItem key={navMenu.title} menu={menu}>
-                        <Link to={navMenu.url}>{navMenu.title}</Link>
-                      </NavMenuItem>
-                    );
-                  })}
+                  {navMenuList.map((navMenu) => (
+                    <NavMenuItem key={navMenu.title} menu={menu}>
+                      <Link to={navMenu.url}>{navMenu.title}</Link>
+                    </NavMenuItem>
+                  ))}
                 </NavMenu>
               </NavItem>
             </NavList>

@@ -1,13 +1,15 @@
-import styled from "styled-components";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable no-shadow */
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
-import flower from "../assets/flower.svg";
-import { useForm } from "react-hook-form";
-import { useEffect } from "react";
-import { useMutation } from "react-query";
-import { postChildRegister } from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { postChildRegister } from '../api/api';
+import flower from '../assets/flower.svg';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const Main = styled.main`
   display: flex;
@@ -123,26 +125,19 @@ function Child() {
     formState: { errors },
   } = useForm();
 
-  const { isSuccess, data, error, mutate } = useMutation(postChildRegister);
+  const { isSuccess, data, mutate } = useMutation(postChildRegister);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(data);
-      navigate("/");
+      navigate('/');
     }
   }, [isSuccess, data, navigate]);
 
-  useEffect(() => {
-    if (error) {
-      console.log(error);
-    }
-  }, [error]);
-
   const onChildLogin = (data, event) => {
     event.preventDefault();
-    const { accessToken } = JSON.parse(localStorage.getItem("user"));
+    const { accessToken } = JSON.parse(localStorage.getItem('user'));
     const mutateData = [
       JSON.stringify({
         child_name: data.childName,
@@ -168,8 +163,8 @@ function Child() {
               <ChildRadio>
                 <input
                   errors={errors.childGender}
-                  {...register("childGender", {
-                    required: "아이의 성별을 선택해주세요.",
+                  {...register('childGender', {
+                    required: '아이의 성별을 선택해주세요.',
                   })}
                   type="radio"
                   value="male"
@@ -180,8 +175,8 @@ function Child() {
               <ChildRadio>
                 <input
                   errors={errors.childGender}
-                  {...register("childGender", {
-                    required: "아이의 성별을 선택해주세요.",
+                  {...register('childGender', {
+                    required: '아이의 성별을 선택해주세요.',
                   })}
                   type="radio"
                   value="female"
@@ -193,8 +188,8 @@ function Child() {
             <ChildError>{errors?.childGender?.message}</ChildError>
             <ChildInput
               errors={errors.childName}
-              {...register("childName", {
-                required: "아이의 이름을 입력해주세요.",
+              {...register('childName', {
+                required: '아이의 이름을 입력해주세요.',
               })}
               type="text"
               placeholder="아이 이름"
@@ -202,8 +197,8 @@ function Child() {
             <ChildError>{errors?.childName?.message}</ChildError>
             <ChildInput
               errors={errors.childAge}
-              {...register("childAge", {
-                required: "아이의 나이를 입력해주세요.",
+              {...register('childAge', {
+                required: '아이의 나이를 입력해주세요.',
               })}
               type="number"
               placeholder="아이 나이"
@@ -211,8 +206,8 @@ function Child() {
             <ChildError>{errors?.childAge?.message}</ChildError>
             <ChildInput
               errors={errors.serialNumber}
-              {...register("serialNumber", {
-                required: "인형의 시리얼 넘버를 입력해주세요.",
+              {...register('serialNumber', {
+                required: '인형의 시리얼 넘버를 입력해주세요.',
               })}
               type="text"
               placeholder="시리얼 넘버"

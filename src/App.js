@@ -1,9 +1,11 @@
-import Router from "./router/Router";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
-import HelmetComponent from "./components/Helmet";
-import io from "socket.io-client";
-import { useEffect } from "react";
-import DefaultTheme from "./styles/DefaultTheme";
+import { useEffect } from 'react';
+import io from 'socket.io-client';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+
+import HelmetComponent from './components/Helmet';
+// eslint-disable-next-line import/no-cycle
+import Router from './router/Router';
+import DefaultTheme from './styles/DefaultTheme';
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -67,26 +69,25 @@ html {
 }
 `;
 
-export const socket = io.connect("http://125.6.39.158:5000/realchat", {
-  transports: ["websocket"],
+export const socket = io.connect('http://125.6.39.158:5000/realchat', {
+  transports: ['websocket'],
 });
 
-socket.emit("join", { serial_number: "abcd1234", type: "SUPERVISOR" });
+socket.emit('join', { serial_number: 'abcd1234', type: 'SUPERVISOR' });
 
 function App() {
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       socket.close();
-    };
-  }, []);
+    },
+    [],
+  );
   return (
-    <>
-      <ThemeProvider theme={DefaultTheme}>
-        <HelmetComponent />
-        <GlobalStyle />
-        <Router />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={DefaultTheme}>
+      <HelmetComponent />
+      <GlobalStyle />
+      <Router />
+    </ThemeProvider>
   );
 }
 

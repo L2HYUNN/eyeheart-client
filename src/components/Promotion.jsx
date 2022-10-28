@@ -1,6 +1,7 @@
-import styled from "styled-components";
-import flower from "../assets/flower.svg";
-import balloon from "../assets/balloon.jpeg";
+import styled from 'styled-components';
+
+import balloon from '../assets/balloon.jpeg';
+import flower from '../assets/flower.svg';
 
 const Container = styled.div`
   display: flex;
@@ -32,8 +33,7 @@ const Contents = styled.div`
   align-items: center;
   width: 33rem;
   height: 33rem;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   border-radius: 2rem;
   @media ${({ theme }) => theme.size.small} {
     flex-direction: column;
@@ -41,17 +41,6 @@ const Contents = styled.div`
     height: 12rem;
   }
   margin-top: 2rem;
-`;
-const Text = styled.span`
-  color: black;
-  font-size: 2.4rem;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  @media ${({ theme }) => theme.size.small} {
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
-  }
 `;
 const Title = styled.div`
   display: flex;
@@ -70,7 +59,7 @@ const TitleImg = styled.img`
   }
 `;
 const TitleName = styled.h1`
-  font-family: "Gamja Flower", cursive;
+  font-family: 'Gamja Flower', cursive;
   font-size: 4.5rem;
   @media ${({ theme }) => theme.size.small} {
     font-size: 3rem;

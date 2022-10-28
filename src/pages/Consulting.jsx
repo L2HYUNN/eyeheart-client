@@ -1,12 +1,13 @@
-import styled from "styled-components";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import RightArrow from "../assets/right-arrow.svg";
-import Hand from "../assets/hand.jpeg";
-import Time from "../assets/time.svg";
-import { Link } from "react-router-dom";
-import { useQuery } from "react-query";
-import { getConsultings } from "../api/api";
+import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+import { getConsultings } from '../api/api';
+import Hand from '../assets/hand.jpeg';
+import RightArrow from '../assets/right-arrow.svg';
+import Time from '../assets/time.svg';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const Main = styled.main`
   display: flex;
@@ -74,8 +75,7 @@ const Doctor = styled.div`
   width: 45rem;
   border-radius: 2rem;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   @media ${({ theme }) => theme.size.small} {
     width: 100%;
   }
@@ -146,7 +146,7 @@ const Arrow = styled.img`
 `;
 
 function Consulting() {
-  const { isLoading, data } = useQuery("consultings", getConsultings);
+  const { isLoading, data } = useQuery('consultings', getConsultings);
 
   return (
     <>
@@ -157,30 +157,26 @@ function Consulting() {
           <Title>아이마음 비대면상담</Title>
           <Doctors>
             {!isLoading
-              ? data.data.counselors.map((doctor) => {
-                  return (
-                    <Doctor key={doctor.profile.id}>
-                      <Link to={`/consulting/${doctor.profile.id}`}>
-                        <DoctorImg src={doctor.profile.thumbnail} />
-                      </Link>
-                      <Link to={`/consulting/${doctor.profile.id}`}>
-                        <DoctorInfo>
-                          <DoctorTitle>
-                            {doctor.profile.name} 상담사
-                          </DoctorTitle>
-                          <DoctorHome>{doctor.profile.breif}</DoctorHome>
-                          <DoctorTime>
-                            <DoctorTimeImg src={Time} />
-                            {`${doctor.times.open} ~ ${doctor.times.close}`}
-                          </DoctorTime>
-                        </DoctorInfo>
-                      </Link>
-                      <Link to={`/consulting/${doctor.profile.id}`}>
-                        <Arrow src={RightArrow} />
-                      </Link>
-                    </Doctor>
-                  );
-                })
+              ? data.data.counselors.map((doctor) => (
+                  <Doctor key={doctor.profile.id}>
+                    <Link to={`/consulting/${doctor.profile.id}`}>
+                      <DoctorImg src={doctor.profile.thumbnail} />
+                    </Link>
+                    <Link to={`/consulting/${doctor.profile.id}`}>
+                      <DoctorInfo>
+                        <DoctorTitle>{doctor.profile.name} 상담사</DoctorTitle>
+                        <DoctorHome>{doctor.profile.breif}</DoctorHome>
+                        <DoctorTime>
+                          <DoctorTimeImg src={Time} />
+                          {`${doctor.times.open} ~ ${doctor.times.close}`}
+                        </DoctorTime>
+                      </DoctorInfo>
+                    </Link>
+                    <Link to={`/consulting/${doctor.profile.id}`}>
+                      <Arrow src={RightArrow} />
+                    </Link>
+                  </Doctor>
+                ))
               : null}
           </Doctors>
         </Infos>

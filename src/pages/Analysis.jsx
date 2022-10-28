@@ -1,12 +1,13 @@
 import styled from "styled-components";
+
+import Footer from "../components/Footer";
 // Components
 import Header from "../components/Header";
 import Info from "../components/Info";
+import Promotion from "../components/Promotion";
+import Relation from "../components/Relation";
 import Status from "../components/Status";
 import Weather from "../components/Weather";
-import Promotion from "../components/Promotion";
-import Footer from "../components/Footer";
-import Relation from "../components/Relation";
 
 const Main = styled.main`
   display: flex;
