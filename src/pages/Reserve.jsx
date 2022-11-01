@@ -1,16 +1,16 @@
+/* eslint-disable no-shadow */
+import moment from "moment";
+import { useEffect, useState } from "react";
+import { useMutation, useQuery } from "react-query";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+
+import { getConsultingsDetail, postConsultingReservation } from "../api/api";
+import Calendar from "../assets/calendar.svg";
+import Chat from "../assets/chats.svg";
+import Time from "../assets/time2.svg";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import PersonImg from "../assets/person.jpeg";
-import Calendar from "../assets/calendar.svg";
-import Time from "../assets/time2.svg";
-import Chat from "../assets/chats.svg";
-import { useState } from "react";
-import moment from "moment";
-import { useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQuery } from "react-query";
-import { getConsultingsDetail, postConsultingReservation } from "../api/api";
-import { useEffect } from "react";
 
 const Main = styled.main`
   display: flex;
@@ -191,19 +191,15 @@ const ReservationDateButton = styled.button`
   height: 5rem;
   border: none;
   border-radius: 2rem;
-  background-color: ${(props) => {
-    return props.children === props.active.date
+  background-color: ${(props) => props.children === props.active.date
       ? props.theme.colors.darkPink
-      : null;
-  }};
+      : null};
   margin-right: 2rem;
   font-size: 1.8rem;
   font-weight: 600;
-  color: ${(props) => {
-    return props.children === props.active.date
+  color: ${(props) => props.children === props.active.date
       ? "white"
-      : "rgba(0, 0, 0, 0.2)";
-  }};
+      : "rgba(0, 0, 0, 0.2)"};
   cursor: pointer;
   @media ${({ theme }) => theme.size.small} {
     height: 4rem;
@@ -237,11 +233,6 @@ const ReservationTimeTitle = styled.h2`
     font-size: 1.6rem;
   }
 `;
-// const ReservationTimeInfo = styled.p`
-//   opacity: 0.6;
-//   margin-bottom: 2rem;
-//   font-size: 2rem;
-// `;
 const ReservationTimeContext = styled.div`
   @media ${({ theme }) => theme.size.small} {
     width: 90vw;
@@ -252,20 +243,16 @@ const ReservationTimeButton = styled.button`
   height: 5rem;
   border: none;
   border-radius: 2rem;
-  background-color: ${(props) => {
-    return props.children === props.active.time
+  background-color: ${(props) => props.children === props.active.time
       ? props.theme.colors.darkPink
-      : null;
-  }};
+      : null};
   margin-right: 2rem;
   margin-bottom: 2rem;
   font-size: 1.8rem;
   font-weight: 600;
-  color: ${(props) => {
-    return props.children === props.active.time
+  color: ${(props) => props.children === props.active.time
       ? "white"
-      : "rgba(0, 0, 0, 0.2)";
-  }};
+      : "rgba(0, 0, 0, 0.2)"};
   cursor: pointer;
   @media ${({ theme }) => theme.size.small} {
     width: 14rem;
@@ -333,25 +320,19 @@ const ReservationButton = styled.button`
   height: 5rem;
   border: none;
   border-radius: 2rem;
-  background-color: ${(props) => {
-    return props.active?.text && props.active.time !== "시간 선택"
+  background-color: ${(props) => props.active?.text && props.active.time !== "시간 선택"
       ? props.theme.colors.darkPink
-      : null;
-  }};
+      : null};
   margin-right: 2rem;
   margin-bottom: 2rem;
   font-size: 1.8rem;
   font-weight: 600;
-  color: ${(props) => {
-    return props.active?.text && props.active.time !== "시간 선택"
+  color: ${(props) => props.active?.text && props.active.time !== "시간 선택"
       ? "white"
-      : "rgba(0, 0, 0, 0.2)";
-  }};
-  cursor: ${(props) => {
-    return props.active?.text && props.active.time !== "시간 선택"
+      : "rgba(0, 0, 0, 0.2)"};
+  cursor: ${(props) => props.active?.text && props.active.time !== "시간 선택"
       ? "pointer"
-      : null;
-  }};
+      : null};
   @media ${({ theme }) => theme.size.small} {
     height: 4rem;
     font-size: 1.4rem;
@@ -398,17 +379,13 @@ function Reserve() {
 
   const reserveDateToday = () => {
     setDate(moment(new Date()).format("MM월 DD일"));
-    setReservation((data) => {
-      return { ...data, date: "오늘" };
-    });
+    setReservation((data) => ({ ...data, date: "오늘" }));
     setPostReservation({ ...postReservation, day: date });
   };
 
   const reserveDateTomorrow = () => {
     setDate(moment(new Date()).add(1, "d").format("MM월 DD일"));
-    setReservation((data) => {
-      return { ...data, date: "내일" };
-    });
+    setReservation((data) => ({ ...data, date: "내일" }));
     setPostReservation({ ...postReservation, day: date });
   };
 
@@ -416,24 +393,20 @@ function Reserve() {
     const begin = event.target.innerText;
     const end = event.target.nextSibling?.innerText ?? "";
 
-    setReservation((data) => {
-      return { ...data, time: begin };
-    });
+    setReservation((data) => ({ ...data, time: begin }));
     setPostReservation({ ...postReservation, begin, end });
   };
 
   const reserveText = (event) => {
     const text = event.target.value;
-    setReservation((data) => {
-      return { ...data, text };
-    });
+    setReservation((data) => ({ ...data, text }));
     setPostReservation({ ...postReservation, content: text });
   };
 
   const requestReservation = () => {
-    console.log(postReservation);
     mutate(JSON.stringify(postReservation));
   };
+
   const time = [
     "09:00",
     "10:00",
@@ -472,11 +445,9 @@ function Reserve() {
                 </PersonTime>
                 <PersonCareer>
                   <PersonCareerTitle>약력</PersonCareerTitle>
-                  {profile?.introduce?.map((career) => {
-                    return (
+                  {profile?.introduce?.map((career) => (
                       <PersonCareerText key={career}>{career}</PersonCareerText>
-                    );
-                  })}
+                    ))}
                 </PersonCareer>
               </>
             ) : null}
@@ -515,8 +486,7 @@ function Reserve() {
                 아이마음은 평일 주말 상관 없이 당일과 다음 날 예약을 제공합니다.
               </ReservationTimeInfo> */}
               <ReservationTimeContext>
-                {time.map((text) => {
-                  return (
+                {time.map((text) => (
                     <ReservationTimeButton
                       key={text}
                       active={reservation}
@@ -524,8 +494,7 @@ function Reserve() {
                     >
                       {text}
                     </ReservationTimeButton>
-                  );
-                })}
+                  ))}
               </ReservationTimeContext>
             </ReservationTime>
             <ReservationContent>
@@ -540,12 +509,12 @@ function Reserve() {
                 상담 내용 입력
               </ReservationContentTitle>
               <ReservationContentInfo>
-                상담 내용을 자세히 작성해주세요. {"( 필수 )"}
+                상담 내용을 자세히 작성해주세요. ( 필수 )
               </ReservationContentInfo>
               <ReservationContentTextArea
                 onChange={reserveText}
                 placeholder="예) 아이가 최근에 부쩍 말 수가 적어졌어요. 학교에서 무슨 문제가 있었던 거 같은데 저한테 말은 안해주고 점점 아이와 소통하기가 쉽지 않아요."
-              ></ReservationContentTextArea>
+               />
             </ReservationContent>
           </ReservationInfo>
         </Wrapper>

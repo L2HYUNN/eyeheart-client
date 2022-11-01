@@ -1,13 +1,14 @@
-import styled from "styled-components";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+/* eslint-disable no-shadow */
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
-import flower from "../assets/flower.svg";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
-import { postUserLogin } from "../api/api";
-import { useEffect } from "react";
+import { postUserLogin } from '../api/api';
+import flower from '../assets/flower.svg';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const Main = styled.main`
   display: flex;
@@ -99,7 +100,7 @@ const LoginJoinText = styled.div`
 `;
 
 function Login() {
-  const { isSuccess, error, data, mutate } = useMutation(postUserLogin);
+  const { isSuccess, data, mutate } = useMutation(postUserLogin);
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
@@ -116,25 +117,12 @@ function Login() {
   useEffect(() => {
     if (isSuccess) {
       const {
-        data: {
-          user_id: userId,
-          access_token: accessToken,
-          refresh_token: refreshToken,
-        },
+        data: { user_id: userId, access_token: accessToken, refresh_token: refreshToken },
       } = data;
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ user: true, userId, accessToken, refreshToken })
-      );
-      navigate("/");
+      localStorage.setItem('user', JSON.stringify({ user: true, userId, accessToken, refreshToken }));
+      navigate('/');
     }
   }, [isSuccess, data, navigate]);
-
-  useEffect(() => {
-    if (error) {
-      console.log(error);
-    }
-  }, [error]);
 
   return (
     <>
@@ -144,20 +132,12 @@ function Login() {
           <LoginImg src={flower} />
           <LoginTitle>로그인</LoginTitle>
           <LoginForm onSubmit={handleSubmit(onLogin)}>
-            <LoginInput
-              {...register("username")}
-              type="text"
-              placeholder="이메일"
-            />
-            <LoginInput
-              {...register("password")}
-              type="password"
-              placeholder="비밀번호"
-            />
+            <LoginInput {...register('username')} type="text" placeholder="이메일" />
+            <LoginInput {...register('password')} type="password" placeholder="비밀번호" />
             <LoginButton type="submit">로그인</LoginButton>
           </LoginForm>
           <LoginJoinText>
-            <Link to={"/join"}>회원가입 하러 가기</Link>
+            <Link to="/join">회원가입 하러 가기</Link>
           </LoginJoinText>
         </Container>
       </Main>

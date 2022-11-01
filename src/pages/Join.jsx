@@ -1,13 +1,14 @@
-import styled from "styled-components";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+/* eslint-disable no-shadow */
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
-import flower from "../assets/flower.svg";
-import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import { useMutation } from "react-query";
-import { postUserRegister } from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { postUserRegister } from '../api/api';
+import flower from '../assets/flower.svg';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const Main = styled.main`
   display: flex;
@@ -97,20 +98,8 @@ const JoinButton = styled.button`
   }
 `;
 
-const JoinRadios = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 3rem;
-`;
-
-const JoinRadio = styled.span`
-  font-size: 1.6rem;
-  :first-child {
-  }
-`;
-
 function Join() {
-  const { isSuccess, data, error, mutate } = useMutation(postUserRegister);
+  const { isSuccess, mutate } = useMutation(postUserRegister);
   const navigate = useNavigate();
   const {
     register,
@@ -121,30 +110,24 @@ function Join() {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/login");
+      navigate('/login');
     }
   }, [isSuccess, navigate]);
-
-  useEffect(() => {
-    if (error) {
-      console.log(error);
-    }
-  }, [error]);
 
   const onLogin = (data, event) => {
     event.preventDefault();
     if (data.password !== data.confirmedPassword) {
-      setError("password", {
-        message: "패스워드가 일치하지 않습니다.",
+      setError('password', {
+        message: '패스워드가 일치하지 않습니다.',
       });
-      setError("confirmedPassword");
+      setError('confirmedPassword');
     }
 
     const mutateData = JSON.stringify({
       user_name: data.username,
       user_subname: data.secondname,
       password: data.confirmedPassword,
-      user_type: "parent",
+      user_type: 'parent',
     });
 
     mutate(mutateData);
@@ -160,12 +143,11 @@ function Join() {
           <JoinForm onSubmit={handleSubmit(onLogin)}>
             <JoinInput
               errors={errors.username}
-              {...register("username", {
-                required: "이메일을 입력해주세요.",
+              {...register('username', {
+                required: '이메일을 입력해주세요.',
                 pattern: {
-                  value:
-                    /^[A-Za-z0-9._%+-]+@[A-Za-z0-9._%+-]+\.[A-Za-z0-9._%+-]+$/,
-                  message: "유효하지 않은 이메일 입니다.",
+                  value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9._%+-]+\.[A-Za-z0-9._%+-]+$/,
+                  message: '유효하지 않은 이메일 입니다.',
                 },
               })}
               type="text"
@@ -174,8 +156,8 @@ function Join() {
             <JoinError>{errors?.username?.message}</JoinError>
             <JoinInput
               errors={errors.secondname}
-              {...register("secondname", {
-                required: "닉네임을 입력해주세요.",
+              {...register('secondname', {
+                required: '닉네임을 입력해주세요.',
               })}
               type="text"
               placeholder="닉네임"
@@ -183,17 +165,15 @@ function Join() {
             <JoinError>{errors?.secondname?.message}</JoinError>
             <JoinInput
               errors={errors.password}
-              {...register("password", {
-                required: "비밀번호를 입력해주세요.",
+              {...register('password', {
+                required: '비밀번호를 입력해주세요.',
                 minLength: {
                   value: 8,
-                  message: "비밀번호는 8자 이상이여야 합니다.",
+                  message: '비밀번호는 8자 이상이여야 합니다.',
                 },
                 pattern: {
-                  value:
-                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@!%*#?&])[A-Za-z\d@!%*#?&]{8,}$/,
-                  message:
-                    "비밀번호는 적어도 하나의 문자, 숫자, 특수 문자를 포함해야합니다.",
+                  value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@!%*#?&])[A-Za-z\d@!%*#?&]{8,}$/,
+                  message: '비밀번호는 적어도 하나의 문자, 숫자, 특수 문자를 포함해야합니다.',
                 },
               })}
               type="password"
@@ -202,7 +182,7 @@ function Join() {
             <JoinError>{errors?.password?.message}</JoinError>
             <JoinInput
               errors={errors.confirmedPassword}
-              {...register("confirmedPassword")}
+              {...register('confirmedPassword')}
               type="password"
               placeholder="비밀번호 확인"
             />

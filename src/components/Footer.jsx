@@ -1,8 +1,9 @@
-import styled from "styled-components";
-import flower from "../assets/flower.svg";
-import instagram from "../assets/instagram.svg";
-import youtube from "../assets/youtube.svg";
-import github from "../assets/github.svg";
+import styled from 'styled-components';
+
+import flower from '../assets/flower.svg';
+import github from '../assets/github.svg';
+import instagram from '../assets/instagram.svg';
+import youtube from '../assets/youtube.svg';
 
 const Container = styled.div`
   display: flex;
@@ -48,7 +49,7 @@ const TitleImg = styled.img`
   }
 `;
 const TitleName = styled.h1`
-  font-family: "Gamja Flower", cursive;
+  font-family: 'Gamja Flower', cursive;
   font-size: 4.5rem;
   @media ${({ theme }) => theme.size.small} {
     font-size: 3rem;
@@ -110,9 +111,9 @@ function Footer() {
           <Nav>
             <NavList>
               <NavItem>
-                <NavImg src={instagram}></NavImg>
-                <NavImg src={youtube}></NavImg>
-                <NavImg src={github}></NavImg>
+                <NavImg src={instagram} />
+                <NavImg src={youtube} />
+                <NavImg src={github} />
               </NavItem>
               <NavItem>프로젝트 소개</NavItem>
               <NavItem>ver 1.0.0</NavItem>

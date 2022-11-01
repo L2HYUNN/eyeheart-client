@@ -1,17 +1,14 @@
-import styled from "styled-components";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Child from "../assets/child.jpeg";
-import Time from "../assets/time.svg";
-import Calendar from "../assets/calendar.svg";
-import flower from "../assets/flower.svg";
-import Chat from "../assets/chats.svg";
-import { useState } from "react";
-import { useQuery } from "react-query";
-import { getUserReservation } from "../api/api";
-import { useEffect } from "react";
-import moment from "moment";
-// import Text from "../assets/text.svg";
+import { useState } from 'react';
+import { useQuery } from 'react-query';
+import styled from 'styled-components';
+
+import { getUserReservation } from '../api/api';
+import Calendar from '../assets/calendar.svg';
+import Chat from '../assets/chats.svg';
+import flower from '../assets/flower.svg';
+import Time from '../assets/time.svg';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const Main = styled.main`
   display: flex;
@@ -57,7 +54,7 @@ const Section = styled.div`
     margin-right: 2rem;
     border-right: 1px solid rgba(0, 0, 0, 0.2);
     @media ${({ theme }) => theme.size.small} {
-      display: ${(props) => (props.toggle ? "flex" : "none")};
+      display: ${(props) => (props.toggle ? 'flex' : 'none')};
       width: 100%;
       height: 100%;
       margin-right: 0;
@@ -75,8 +72,7 @@ const Reservation = styled.div`
   align-items: center;
   width: 65rem;
   height: 15rem;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   padding: 2rem;
   margin-bottom: 5rem;
   border-radius: 2rem;
@@ -413,8 +409,8 @@ const ConsultingContentsText = styled.p`
 function CheckReservation() {
   const [toggle, setToggle] = useState(false);
   const [info, setInfo] = useState({});
-  const { isLoading, data } = useQuery("userReservationInfo", () =>
-    getUserReservation(JSON.parse(localStorage.getItem("user")).userId)
+  const { data } = useQuery('userReservationInfo', () =>
+    getUserReservation(JSON.parse(localStorage.getItem('user')).userId),
   );
 
   const showDetailInfo = (event) => {
@@ -423,8 +419,6 @@ function CheckReservation() {
     }
     setInfo(data.data.reservations[event.target.id]);
   };
-
-  const confirmReservation = () => {};
 
   return (
     <>
@@ -438,9 +432,7 @@ function CheckReservation() {
                 {toggle ? (
                   <Consulting>
                     <ConsultingDoctor>
-                      <ConsultingDoctorImg
-                        src={info?.counselor?.info?.thumbnail}
-                      />
+                      <ConsultingDoctorImg src={info?.counselor?.info?.thumbnail} />
                       <ConsultingDoctorName>
                         <p>상담사</p>
                         <p>{info?.counselor?.info?.user_subname}</p>
@@ -462,9 +454,7 @@ function CheckReservation() {
                     </ConsultingTimeText>
                     <ConsultingContents>
                       <ConsultingContentsImg src={Chat} />
-                      <ConsultingContentsTitle>
-                        상담 내용
-                      </ConsultingContentsTitle>
+                      <ConsultingContentsTitle>상담 내용</ConsultingContentsTitle>
                     </ConsultingContents>
                     <ConsultingContentsTexts>
                       {info?.detail?.content.map((text) => (
@@ -479,37 +469,31 @@ function CheckReservation() {
             </Intro>
           </Section>
           <Section>
-            {data?.data?.reservations?.map((reservationInfo, index) => {
-              return (
-                <Reservation key={reservationInfo?.counselor?.info?.id}>
-                  <ReservationImg
-                    src={reservationInfo?.counselor?.info?.thumbnail}
-                  />
-                  <ReservationContents>
-                    <ReservationName>
-                      {reservationInfo?.counselor?.info?.user_subname}
-                    </ReservationName>
-                    <ReservationDate>
-                      <ReservationDateImg src={Calendar} />
-                      {reservationInfo?.detail?.day}
-                    </ReservationDate>
-                    <ReservationTime>
-                      <ReservationTimeImg src={Time} />
-                      {`${reservationInfo?.detail?.begin} ~ ${reservationInfo?.detail?.end}`}
-                    </ReservationTime>
-                  </ReservationContents>
-                  <ReservationBtns>
-                    <ReservationResultBtns>
-                      <ReservationSucessBtn>확정</ReservationSucessBtn>
-                      <ReservationCancelBtn>취소</ReservationCancelBtn>
-                    </ReservationResultBtns>
-                    <ReservationDetailBtn id={index} onClick={showDetailInfo}>
-                      상세 정보 보기
-                    </ReservationDetailBtn>
-                  </ReservationBtns>
-                </Reservation>
-              );
-            })}
+            {data?.data?.reservations?.map((reservationInfo, index) => (
+              <Reservation key={reservationInfo?.counselor?.info?.id}>
+                <ReservationImg src={reservationInfo?.counselor?.info?.thumbnail} />
+                <ReservationContents>
+                  <ReservationName>{reservationInfo?.counselor?.info?.user_subname}</ReservationName>
+                  <ReservationDate>
+                    <ReservationDateImg src={Calendar} />
+                    {reservationInfo?.detail?.day}
+                  </ReservationDate>
+                  <ReservationTime>
+                    <ReservationTimeImg src={Time} />
+                    {`${reservationInfo?.detail?.begin} ~ ${reservationInfo?.detail?.end}`}
+                  </ReservationTime>
+                </ReservationContents>
+                <ReservationBtns>
+                  <ReservationResultBtns>
+                    <ReservationSucessBtn>확정</ReservationSucessBtn>
+                    <ReservationCancelBtn>취소</ReservationCancelBtn>
+                  </ReservationResultBtns>
+                  <ReservationDetailBtn id={index} onClick={showDetailInfo}>
+                    상세 정보 보기
+                  </ReservationDetailBtn>
+                </ReservationBtns>
+              </Reservation>
+            ))}
           </Section>
         </Wrapper>
       </Main>
