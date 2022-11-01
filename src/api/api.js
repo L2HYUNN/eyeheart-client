@@ -1,7 +1,7 @@
 /* eslint-disable no-return-await */
 import axios from 'axios';
 
-const BASE_URL = 'http://125.6.39.158:5000';
+const BASE_URL = 'https://api.k-doll-ai-restful.com';
 
 export const postUserRegister = async (data) =>
   await axios.post(`${BASE_URL}/register`, data, {
