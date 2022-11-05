@@ -2,7 +2,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable import/no-cycle */
 import 'react-calendar/dist/Calendar.css';
-import 'moment/locale/ko'
+import 'moment/locale/ko';
 
 import moment from 'moment';
 import { useEffect, useRef, useState } from 'react';
@@ -382,8 +382,12 @@ function ChatDetail() {
   };
 
   useEffect(() => {
-    socket.on('RECEIVE_MESSAGE', ({ response: message, day, time }) => {
-      setChat((prev) => [...prev, { direction: 'USER', utterance: message, day, time }]);
+    socket.on('RECEIVE_MESSAGE', ({ response: message, day, time, type }) => {
+      if (type === 'USER') {
+        setChat((prev) => [...prev, { direction: 'USER', utterance: message, day, time }]);
+      } else {
+        setChat((prev) => [...prev, { direction: 'BOT', utterance: message, day, time }]);
+      }
     });
   }, [setChat]);
 
