@@ -69,7 +69,7 @@ html {
 }
 `;
 
-export const socket = io.connect('http://125.6.39.158:5000/realchat', {
+export const socket = io.connect('https://api.k-doll-ai-restful.com/realchat', {
   transports: ['websocket'],
 });
 
