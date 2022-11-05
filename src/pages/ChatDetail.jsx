@@ -2,6 +2,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable import/no-cycle */
 import 'react-calendar/dist/Calendar.css';
+import 'moment/locale/ko'
 
 import moment from 'moment';
 import { useEffect, useRef, useState } from 'react';
@@ -370,9 +371,9 @@ function ChatDetail() {
   const sendMessage = (e) => {
     e.preventDefault();
 
-    const now = moment();
+    const now = moment().locale('ko');
     const day = now.format('YYYYMMDD');
-    const time = now.format('HHmmss');
+    const time = now.format('LT');
 
     socket.emit('SEND_MESSAGE', { type: 'SUPERVISOR', message });
 
