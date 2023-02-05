@@ -1,8 +1,10 @@
-import moment from "moment";
-import { useQuery } from "react-query";
-import styled from "styled-components";
-import { getAnalysisEmotion, getAnalysisHeart } from "../api/api";
-import child from "../assets/child.jpeg";
+/* eslint-disable no-shadow */
+import moment from 'moment';
+import { useQuery } from 'react-query';
+import styled from 'styled-components';
+
+import { getAnalysisEmotion, getAnalysisHeart } from '../api/api';
+import child from '../assets/child.jpeg';
 
 const Container = styled.div`
   display: flex;
@@ -27,8 +29,7 @@ const Contents = styled.div`
   width: 67rem;
   height: 25rem;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   border-radius: 2rem;
   @media ${({ theme }) => theme.size.small} {
     flex-direction: column;
@@ -127,7 +128,7 @@ const HeartInfo = styled.div`
   background-color: ${(props) => props.color};
   font-size: 1.8rem;
   font-weight: 400;
-  font-family: "Gamja Flower", cursive;
+  font-family: 'Gamja Flower', cursive;
   /* box-shadow: ${(props) => props.color} 0px 6px 24px 0px,
     ${(props) => props.color} 0px 0px 0px 1px; */
   @media ${({ theme }) => theme.size.small} {
@@ -155,11 +156,11 @@ const InterestItem = styled.div`
   font-weight: 600;
 `;
 
-const date = moment().format("YYYYMMDD");
+const date = moment().format('YYYYMMDD');
 
 function Info() {
-  const heart = useQuery("analysisHeart", () => getAnalysisHeart(date));
-  const emotion = useQuery("analysisEmotion", () => getAnalysisEmotion(date));
+  const heart = useQuery('analysisHeart', () => getAnalysisHeart(date));
+  const emotion = useQuery('analysisEmotion', () => getAnalysisEmotion(date));
 
   return (
     <Container>
@@ -172,24 +173,18 @@ function Info() {
           <Chart>
             <ChartName>마음지수</ChartName>
             <ChartContents>
-              <ChartGraph
-                number={heart?.data?.data?.summary?.emotion?.emotion_score}
-              ></ChartGraph>
-              <ChartNumber>
-                {Math.floor(heart?.data?.data?.summary?.emotion?.emotion_score)}
-              </ChartNumber>
+              <ChartGraph number={heart?.data?.data?.summary?.emotion?.emotion_score} />
+              <ChartNumber>{Math.floor(heart?.data?.data?.summary?.emotion?.emotion_score)}</ChartNumber>
             </ChartContents>
           </Chart>
           <Heart>
             <HeartName>마음</HeartName>
             <HeartContents>
-              {emotion?.data?.data?.message.map((heart) => {
-                return (
-                  <HeartInfo key={heart?.name} color={heart?.color}>
-                    {heart?.name}
-                  </HeartInfo>
-                );
-              })}
+              {emotion?.data?.data?.message.map((heart) => (
+                <HeartInfo key={heart?.name} color={heart?.color}>
+                  {heart?.name}
+                </HeartInfo>
+              ))}
             </HeartContents>
           </Heart>
           <Interest>

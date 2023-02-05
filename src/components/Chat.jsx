@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import child from "../assets/child.jpeg";
+import styled from 'styled-components';
+
+import child from '../assets/child.jpeg';
 
 const Container = styled.div`
   display: flex;
@@ -16,8 +17,7 @@ const Contents = styled.div`
   width: 67rem;
   height: 100rem;
   background-color: ${({ theme }) => theme.colors.pink};
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   border-radius: 2rem;
   padding: 2rem 4rem;
 `;
@@ -97,62 +97,62 @@ function Chat() {
   const DummyChat = [
     {
       id: 1,
-      name: "민영이",
-      chat: "오늘 너무 우울했어",
-      time: "오후 12:21",
-      role: "child",
+      name: '민영이',
+      chat: '오늘 너무 우울했어',
+      time: '오후 12:21',
+      role: 'child',
     },
     {
       id: 6,
-      chat: "왜 그렇게 우울했어?",
-      time: "오후 12:21",
-      role: "user",
+      chat: '왜 그렇게 우울했어?',
+      time: '오후 12:21',
+      role: 'user',
     },
     {
       id: 2,
-      name: "민영이",
-      chat: "학교에서 친구랑 싸웠어",
-      time: "오후 12:21",
-      role: "child",
+      name: '민영이',
+      chat: '학교에서 친구랑 싸웠어',
+      time: '오후 12:21',
+      role: 'child',
     },
     {
       id: 7,
-      chat: "어쩌다가 싸우게 된거야?",
-      time: "오후 12:21",
-      role: "user",
+      chat: '어쩌다가 싸우게 된거야?',
+      time: '오후 12:21',
+      role: 'user',
     },
     {
       id: 3,
-      name: "민영이",
-      chat: "내가 분명 지우개 빌린다고 했는데 친구가 언제 그랬냐면서 화냈어",
-      time: "오후 12:22",
-      role: "child",
+      name: '민영이',
+      chat: '내가 분명 지우개 빌린다고 했는데 친구가 언제 그랬냐면서 화냈어',
+      time: '오후 12:22',
+      role: 'child',
     },
     {
       id: 8,
-      chat: "기분이 안 좋았겠네 그래도 화해하는게 좋지 않을까?",
-      time: "오후 12:22",
-      role: "user",
+      chat: '기분이 안 좋았겠네 그래도 화해하는게 좋지 않을까?',
+      time: '오후 12:22',
+      role: 'user',
     },
     {
       id: 4,
-      name: "민영이",
-      chat: "화해 하고 싶은데 어떻게 해야할지 모르겠어",
-      time: "오후 12:22",
-      role: "child",
+      name: '민영이',
+      chat: '화해 하고 싶은데 어떻게 해야할지 모르겠어',
+      time: '오후 12:22',
+      role: 'child',
     },
     {
       id: 9,
-      chat: "왜 그렇게 화가났었는지 물어보고 천천히 이야기해봐!",
-      time: "오후 12:22",
-      role: "user",
+      chat: '왜 그렇게 화가났었는지 물어보고 천천히 이야기해봐!',
+      time: '오후 12:22',
+      role: 'user',
     },
     {
       id: 5,
-      name: "민영이",
-      chat: "응 알았어 한 번 해볼게!",
-      time: "오후 12:23",
-      role: "child",
+      name: '민영이',
+      chat: '응 알았어 한 번 해볼게!',
+      time: '오후 12:23',
+      role: 'child',
     },
   ];
 
@@ -165,10 +165,10 @@ function Chat() {
         <ChatBox>
           <Chatlog>
             {DummyChat.map((user) => {
-              if (user.role === "child") {
+              if (user.role === 'child') {
                 return (
                   <ChildContents key={user.id}>
-                    <ChildImg src={child}></ChildImg>
+                    <ChildImg src={child} />
                     <ChildInfo>
                       <ChildName>{user.name}</ChildName>
                       <ChildChats>
@@ -178,16 +178,15 @@ function Chat() {
                     </ChildInfo>
                   </ChildContents>
                 );
-              } else {
-                return (
-                  <UserContents key={user.id}>
-                    <UserChats>
-                      <UserChatTime>{user.time}</UserChatTime>
-                      <UserChat>{user.chat}</UserChat>
-                    </UserChats>
-                  </UserContents>
-                );
               }
+              return (
+                <UserContents key={user.id}>
+                  <UserChats>
+                    <UserChatTime>{user.time}</UserChatTime>
+                    <UserChat>{user.chat}</UserChat>
+                  </UserChats>
+                </UserContents>
+              );
             })}
           </Chatlog>
         </ChatBox>

@@ -1,16 +1,17 @@
-import styled from "styled-components";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import page from "../assets/main.png";
-import chevronDown from "../assets/chevron-down.svg";
-import chat from "../assets/chat.png";
-import info from "../assets/info.png";
-import status from "../assets/status.png";
-import weather from "../assets/weather.png";
-import mobile from "../assets/mobile.png";
-import mobileMain from "../assets/mobileMain.png";
-import mobileChat from "../assets/mobileChat.png";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+import chat from '../assets/chat.png';
+import chevronDown from '../assets/chevron-down.svg';
+import info from '../assets/info.png';
+import page from '../assets/main.png';
+import mobile from '../assets/mobile.png';
+import mobileChat from '../assets/mobileChat.png';
+import mobileMain from '../assets/mobileMain.png';
+import status from '../assets/status.png';
+import weather from '../assets/weather.png';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const Container = styled.main`
   display: flex;
@@ -89,8 +90,7 @@ const InfoSubContents = styled.div`
 const InfoImg = styled.img`
   width: 70rem;
   height: 60rem;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   border-radius: 2rem;
   margin-top: 15rem;
   object-fit: contain;
@@ -139,8 +139,7 @@ const ChatInfoImg = styled.img`
   width: 48rem;
   height: 65rem;
   border-radius: 2rem;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   @media ${({ theme }) => theme.size.small} {
     width: 30rem;
     height: 50rem;
@@ -272,8 +271,7 @@ const MobileInfoImg = styled.img`
   height: 65rem;
   margin-right: 5rem;
   border-radius: 2rem;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   @media ${({ theme }) => theme.size.small} {
     width: 10rem;
     height: 50rem;
@@ -338,18 +336,12 @@ function Home() {
       <Container>
         <Info>
           <InfoContents>
-            <InfoTitle>
-              우리 아이의 숨은 마음을 알아보고 분석해주는 아이마음
-            </InfoTitle>
+            <InfoTitle>우리 아이의 숨은 마음을 알아보고 분석해주는 아이마음</InfoTitle>
             <InfoSubTitle>아이의 속마음을 알고 싶나요?</InfoSubTitle>
-            <InfoSubTitle>
-              아이마음을 통해 우리 아이의 숨은 심리를 알아보세요.
-            </InfoSubTitle>
-            <InfoSubTitle>
-              다양한 통계를 통해 아이의 상태가 제공됩니다.
-            </InfoSubTitle>
+            <InfoSubTitle>아이마음을 통해 우리 아이의 숨은 심리를 알아보세요.</InfoSubTitle>
+            <InfoSubTitle>다양한 통계를 통해 아이의 상태가 제공됩니다.</InfoSubTitle>
             <InfoButton>
-              <Link to={"/join"}>가입하고 아이마음 확인하기</Link>
+              <Link to="/join">가입하고 아이마음 확인하기</Link>
             </InfoButton>
           </InfoContents>
           <InfoSubContents>
@@ -363,39 +355,21 @@ function Home() {
               <ChatInfoImg src={chat} />
             </ChatInfoSubContents>
             <ChatInfoContents>
-              <ChatInfoTitle>
-                실시간으로 아이와 대화하고 대화 로그를 확인하세요.
-              </ChatInfoTitle>
-              <ChatInfoSubTitle>
-                아이마음 인형을 통해 아이와 대화해보세요.
-              </ChatInfoSubTitle>
-              <ChatInfoSubTitle>
-                아이의 숨은 마음을 알아 볼 수 있습니다.
-              </ChatInfoSubTitle>
-              <ChatInfoSubTitle>
-                인형과 아이의 대화 내용이 실시간으로 제공됩니다.
-              </ChatInfoSubTitle>
-              <ChatInfoSubTitle>
-                대화 로그를 통해 아이의 진짜 마음을 알아보세요!
-              </ChatInfoSubTitle>
+              <ChatInfoTitle>실시간으로 아이와 대화하고 대화 로그를 확인하세요.</ChatInfoTitle>
+              <ChatInfoSubTitle>아이마음 인형을 통해 아이와 대화해보세요.</ChatInfoSubTitle>
+              <ChatInfoSubTitle>아이의 숨은 마음을 알아 볼 수 있습니다.</ChatInfoSubTitle>
+              <ChatInfoSubTitle>인형과 아이의 대화 내용이 실시간으로 제공됩니다.</ChatInfoSubTitle>
+              <ChatInfoSubTitle>대화 로그를 통해 아이의 진짜 마음을 알아보세요!</ChatInfoSubTitle>
             </ChatInfoContents>
           </ChatInfoContainer>
         </ChatInfo>
         <ReportInfo>
           <ReportInfoContainer>
             <ReportInfoContents>
-              <ReportInfoTitle>
-                분석된 아이의 심리 상태를 살펴보세요.
-              </ReportInfoTitle>
-              <ReportInfoSubTitle>
-                아이마음은 다양한 분석 도구를 제공합니다.
-              </ReportInfoSubTitle>
-              <ReportInfoSubTitle>
-                통계를 통해 제공되는 아이의 상태를 확인해보세요!
-              </ReportInfoSubTitle>
-              <ReportInfoSubTitle>
-                다른 아이들과의 차이점을 통해 우리 아이만의 문제점을 찾아보세요.
-              </ReportInfoSubTitle>
+              <ReportInfoTitle>분석된 아이의 심리 상태를 살펴보세요.</ReportInfoTitle>
+              <ReportInfoSubTitle>아이마음은 다양한 분석 도구를 제공합니다.</ReportInfoSubTitle>
+              <ReportInfoSubTitle>통계를 통해 제공되는 아이의 상태를 확인해보세요!</ReportInfoSubTitle>
+              <ReportInfoSubTitle>다른 아이들과의 차이점을 통해 우리 아이만의 문제점을 찾아보세요.</ReportInfoSubTitle>
             </ReportInfoContents>
             <ReportInfoSubContents>
               <ReportInfoImg src={weather} />
@@ -413,25 +387,17 @@ function Home() {
             </MobileInfoSubContents>
             <MobileInfoContents>
               <MobileInfoTitle>모바일로 간편하게 이용하세요.</MobileInfoTitle>
-              <MobileInfoSubTitle>
-                아이마음을 이제 모바일에서도 만나보세요!
-              </MobileInfoSubTitle>
-              <MobileInfoSubTitle>
-                컴퓨터 없이 간단한게 모바일로 접속 가능합니다.
-              </MobileInfoSubTitle>
-              <MobileInfoSubTitle>
-                언제 어디서든 아이의 상태를 실시간으로 확인하세요.
-              </MobileInfoSubTitle>
+              <MobileInfoSubTitle>아이마음을 이제 모바일에서도 만나보세요!</MobileInfoSubTitle>
+              <MobileInfoSubTitle>컴퓨터 없이 간단한게 모바일로 접속 가능합니다.</MobileInfoSubTitle>
+              <MobileInfoSubTitle>언제 어디서든 아이의 상태를 실시간으로 확인하세요.</MobileInfoSubTitle>
             </MobileInfoContents>
           </MobileInfoContainer>
         </MobileInfo>
         <LastInfo>
           <LastInfoContents>
-            <LastInfoTitle>
-              아이의 숨은 마음을 확인 할 준비가 되셨나요?
-            </LastInfoTitle>
+            <LastInfoTitle>아이의 숨은 마음을 확인 할 준비가 되셨나요?</LastInfoTitle>
             <LastInfoButton>
-              <Link to={"/join"}>아이마음 시작하기</Link>
+              <Link to="/join">아이마음 시작하기</Link>
             </LastInfoButton>
           </LastInfoContents>
         </LastInfo>

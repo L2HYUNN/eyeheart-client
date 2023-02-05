@@ -1,8 +1,9 @@
-import moment from "moment";
-import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import styled from "styled-components";
-import { getAnalysisRelation } from "../api/api";
+import moment from 'moment';
+import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+import styled from 'styled-components';
+
+import { getAnalysisRelation } from '../api/api';
 
 const Container = styled.div`
   display: flex;
@@ -27,8 +28,7 @@ const RelationItems = styled.ul`
   align-items: center;
   width: 100%;
   height: 140rem;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   border-radius: 2rem;
   padding: 2rem 4rem;
   @media ${({ theme }) => theme.size.small} {
@@ -98,13 +98,11 @@ const RelationText = styled.p`
   }
 `;
 
-const date = moment(new Date()).format("YYYYMMDD");
+const date = moment(new Date()).format('YYYYMMDD');
 
 function Relation() {
   const [relationship, setRelationship] = useState({});
-  const { isLoading, data } = useQuery("analysisRelation", () =>
-    getAnalysisRelation(date)
-  );
+  const { isLoading, data } = useQuery('analysisRelation', () => getAnalysisRelation(date));
 
   useEffect(() => {
     if (!isLoading) {
@@ -116,27 +114,23 @@ function Relation() {
     <Container>
       <RelationItems>
         {relationship
-          ? Object.entries(relationship).map(([key, value]) => {
-              return (
-                <RelationItem key={key}>
-                  <RelationImg src={value?.thumbnail} />
-                  <RelationLabel>{key}</RelationLabel>
-                  <RelationContents>
-                    <RelationName>{value?.score}</RelationName>
+          ? Object.entries(relationship).map(([key, value]) => (
+              <RelationItem key={key}>
+                <RelationImg src={value?.thumbnail} />
+                <RelationLabel>{key}</RelationLabel>
+                <RelationContents>
+                  <RelationName>{value?.score}</RelationName>
 
-                    <RelationTexts>
-                      {value?.topic.map(({ name, count }) => {
-                        return (
-                          <RelationText key={name}>
-                            {name}: {count}
-                          </RelationText>
-                        );
-                      })}
-                    </RelationTexts>
-                  </RelationContents>
-                </RelationItem>
-              );
-            })
+                  <RelationTexts>
+                    {value?.topic.map(({ name, count }) => (
+                      <RelationText key={name}>
+                        {name}: {count}
+                      </RelationText>
+                    ))}
+                  </RelationTexts>
+                </RelationContents>
+              </RelationItem>
+            ))
           : null}
       </RelationItems>
     </Container>
